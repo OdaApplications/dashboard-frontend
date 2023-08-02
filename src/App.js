@@ -23,7 +23,7 @@ function App() {
         path="/login"
         element={
           <RestrictedRoute
-            component={<Auth />}
+            component={Auth}
             redirectTo={"/metrica/home/all"}
           />
         }
@@ -43,13 +43,13 @@ function App() {
         <Route
           path="/cabinet/:page"
           element={
-            <PrivateRoute component={<CabinetPage />} redirectTo="/login" />
+            <PrivateRoute component={CabinetPage} redirectTo="/login" />
           }
         >
           <Route
             path="/cabinet/:page/:sub"
             element={
-              <PrivateRoute component={<CabinetPage />} redirectTo="/login" />
+              <PrivateRoute component={CabinetPage} redirectTo="/login" />
             }
           />
         </Route>
