@@ -24,10 +24,7 @@ export const ChartBar = ({ chartConfig, filter }) => {
       setCurrentSeries(newSeries);
     }
   }, [chartConfig, filter]);
-  console.log("asdasdasdmgfhgfjhfgjhfjh", {
-    ...chartConfig.options,
-    fill: ["#B3E0EA"],
-  });
+
   if (!chartConfig.options) {
     return <div>no data</div>;
   }

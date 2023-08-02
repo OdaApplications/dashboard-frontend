@@ -82,4 +82,5 @@ export const SenderText = styled("p")(({ theme }) => ({
   fontFamily: "e-Ukraine",
   fontSize: "14px",
   fontWeight: "300",
+  overflowWrap: 'break-word'
 }));
