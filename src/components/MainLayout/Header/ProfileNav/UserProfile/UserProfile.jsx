@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import * as SC from "./UserProfile.styled";
 import { selectUser } from "redux/auth/authSlice";
 import { useNavigate } from "react-router-dom";
-import { useLogoutMutation } from "redux/auth/authAPI";
+import { useLogoutMutation } from "redux/API/authApi";
 import { LoaderSmall } from "components/Loader";
 
 export const UserProfile = ({

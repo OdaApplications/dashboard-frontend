@@ -13,7 +13,7 @@ import {
 import storage from "redux-persist/lib/storage";
 
 import { authSlice } from "./auth/authSlice";
-import { authApi } from "./auth/authAPI";
+import { api } from "./API/API";
 
 const persistConfig = {
   key: "token",
@@ -26,7 +26,7 @@ const persistedAuthReducer = persistReducer(persistConfig, authSlice.reducer);
 export const store = configureStore({
   reducer: {
     [authSlice.name]: persistedAuthReducer,
-    [authApi.reducerPath]: authApi.reducer,
+    [api.reducerPath]: api.reducer,
   },
   middleware: (getDefaultMiddleware) => [
     ...getDefaultMiddleware({
@@ -34,7 +34,7 @@ export const store = configureStore({
         ignoreActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
-    authApi.middleware,
+    api.middleware,
   ],
 });
 

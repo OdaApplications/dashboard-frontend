@@ -1,6 +1,6 @@
 import * as SC from "./Login.styled";
 import { useFormik } from "formik";
-import { useLoginMutation } from "redux/auth/authAPI";
+import { useLoginMutation } from "redux/API/authApi";
 import { useNavigate } from "react-router-dom";
 import { LoaderBig } from "components/Loader";
 

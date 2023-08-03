@@ -1,6 +1,6 @@
 // Slice for auth
 import { createSlice } from "@reduxjs/toolkit";
-import { authApi } from "./authAPI";
+import { api } from "redux/API/API";
 
 const initialState = {
   token: null,
@@ -21,37 +21,31 @@ export const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    builder.addMatcher(api.endpoints.login.matchFulfilled, (state, action) => {
+      state.token = action.payload.token;
+      state.user = action.payload.data.user;
+      state.isLogin = true;
+    });
     builder.addMatcher(
-      authApi.endpoints.login.matchFulfilled,
-      (state, action) => {
-        state.token = action.payload.token;
-        state.user = action.payload.data.user;
-        state.isLogin = true;
-      }
-    );
-    builder.addMatcher(
-      authApi.endpoints.currentUser.matchFulfilled,
+      api.endpoints.currentUser.matchFulfilled,
       (state, action) => {
         state.user = action.payload.data.user;
         state.isLogin = true;
       }
     );
     builder.addMatcher(
-      authApi.endpoints.currentUser.matchRejected,
+      api.endpoints.currentUser.matchRejected,
       (state, action) => {
         state.user = null;
         state.token = null;
         state.isLogin = false;
       }
     );
-    builder.addMatcher(
-      authApi.endpoints.logout.matchFulfilled,
-      (state, action) => {
-        state.token = null;
-        state.user = null;
-        state.isLogin = false;
-      }
-    );
+    builder.addMatcher(api.endpoints.logout.matchFulfilled, (state, action) => {
+      state.token = null;
+      state.user = null;
+      state.isLogin = false;
+    });
   },
 });
 

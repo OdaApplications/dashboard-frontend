@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import { useCurrentUserQuery } from "redux/auth/authAPI";
+import { useCurrentUserQuery } from "redux/API/authApi";
 import { selectToken, selectIsLogin } from "redux/auth/authSlice";
 
 export const PrivateRoute = ({ component: Component, redirectTo = "/" }) => {

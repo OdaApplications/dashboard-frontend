@@ -3,9 +3,14 @@ import { Box } from "@mui/material";
 
 export const MessagesContainer = styled(Box)((props) => ({
   width: "100%",
+  height: "100%",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
+  border: "3px solid #000",
+  borderRadius: "12px",
+  padding: "12px 20px",
+  gap: "12px",
 
   overflow: "hidden",
   // overflowY: "scroll",
@@ -17,8 +22,5 @@ export const MessagesList = styled("ul")((props) => ({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  padding: "20px",
   margin: "0",
-  borderRadius: "12px",
-  border: "3px solid #000",
 }));

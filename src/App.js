@@ -8,7 +8,7 @@ import Auth from "pages/Auth";
 import CabinetPage from "pages/CabinetPage";
 
 import { useSelector } from "react-redux";
-import { useCurrentUserQuery } from "redux/auth/authAPI";
+import { useCurrentUserQuery } from "redux/API/authApi";
 import { selectToken } from "redux/auth/authSlice";
 import { RestrictedRoute } from "components/RestrictedRoute";
 import { PrivateRoute } from "components/PrivateRoute";
@@ -22,10 +22,7 @@ function App() {
       <Route
         path="/login"
         element={
-          <RestrictedRoute
-            component={Auth}
-            redirectTo={"/metrica/home/all"}
-          />
+          <RestrictedRoute component={Auth} redirectTo={"/metrica/home/all"} />
         }
       />
       <Route path="/" element={<SharedLayout />}>
@@ -42,9 +39,7 @@ function App() {
 
         <Route
           path="/cabinet/:page"
-          element={
-            <PrivateRoute component={CabinetPage} redirectTo="/login" />
-          }
+          element={<PrivateRoute component={CabinetPage} redirectTo="/login" />}
         >
           <Route
             path="/cabinet/:page/:sub"

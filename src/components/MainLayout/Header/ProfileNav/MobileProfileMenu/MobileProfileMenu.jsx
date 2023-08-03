@@ -10,7 +10,7 @@ import {
 
 import { Logout, MoreVert, AccountCircle } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import { useLogoutMutation } from "redux/auth/authAPI";
+import { useLogoutMutation } from "redux/API/authApi";
 
 export const MobileProfileMenu = ({ mobileMenuId }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
