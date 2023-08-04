@@ -272,7 +272,7 @@ export const metricaPages = [
                         },
                         legend: {
                           labels: {
-                            colors: "#000т",
+                            colors: "#000",
                           },
                           position: "top",
                         },

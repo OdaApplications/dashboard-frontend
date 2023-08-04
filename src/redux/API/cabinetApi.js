@@ -4,7 +4,7 @@ export const cabinetApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getUserMsg: builder.query({
       query: () => ({
-        url: "/cabinet/user-messages-join",
+        url: "/cabinet/messages/get-messages",
       }),
     }),
   }),

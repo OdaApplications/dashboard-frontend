@@ -2,8 +2,8 @@ import { useState } from "react";
 // import { Suspense } from "react";
 import Box from "@mui/material/Box";
 import { Outlet } from "react-router-dom";
-import Header from "../MainLayout/Header";
-import SideBar from "../SideBar/SideBar";
+import Header from "./Header";
+import SideBar from "./SideBar/SideBar";
 
 const SharedLayout = ({ children }) => {
   const [open, setOpen] = useState(false);

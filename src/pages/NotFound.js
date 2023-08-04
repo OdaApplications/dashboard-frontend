@@ -1,4 +1,4 @@
-import { MessageBox } from "components/MessageBox";
+import { MessageBox } from "components/MainLayout/MessageBox";
 
 const NotFound = () => {
   return <MessageBox errorCode={"404"} text={"Сторінка не знайдена"} />;
