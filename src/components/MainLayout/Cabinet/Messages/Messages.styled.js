@@ -12,8 +12,14 @@ export const MessagesContainer = styled(Box)((props) => ({
   padding: "12px 20px",
   gap: "12px",
 
-  overflow: "hidden",
-  // overflowY: "scroll",
+  overflowY: "scroll",
+
+  msOverflowStyle: "none",
+  scrollbarWidth: "none",
+
+  "&::-webkit-scrollbar": {
+    display: "none",
+  },
 }));
 
 export const MessagesList = styled("ul")((props) => ({
