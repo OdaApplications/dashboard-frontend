@@ -1,7 +1,7 @@
 import React from "react";
 import { Box } from "@mui/material";
 
-import CabinetLayout from "components/Cabinet/CabinetLayout";
+import CabinetLayout from "components/MainLayout/Cabinet/CabinetLayout";
 
 export const CabinetPage = () => {
   return (

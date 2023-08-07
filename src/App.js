@@ -2,7 +2,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 
 import SharedLayout from "./components/SharedLayout/SharedLayout";
 
-import PageLayoute from "./components/MainLayout/PageLayout/PageLayoute";
+import PageLayoute from "./components/MainLayout/Metrica/PageLayout/PageLayoute";
 import NotFound from "./pages/NotFound";
 import Auth from "pages/Auth";
 import CabinetPage from "pages/CabinetPage";

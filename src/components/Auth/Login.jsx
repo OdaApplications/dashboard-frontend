@@ -2,7 +2,7 @@ import * as SC from "./Login.styled";
 import { useFormik } from "formik";
 import { useLoginMutation } from "redux/API/authApi";
 import { useNavigate } from "react-router-dom";
-import { LoaderBig } from "components/Loader";
+import { LoaderBig } from "components/MainLayout/Loader";
 
 export const Login = () => {
   const [login, { isLoading }] = useLoginMutation();

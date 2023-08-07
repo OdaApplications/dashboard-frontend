@@ -29,7 +29,7 @@ export const mainPagesCabinet = [
     id: "analytics",
     title: "Аналітика",
     menuTitle: "Аналітика",
-    url: "cabinet/analytics/home/all",
+    url: "/cabinet/analytics/home/all",
     type: "noCollapse",
     icon: <QueryStats />,
     color: "#FF6931",
@@ -281,7 +281,7 @@ export const metricaPages = [
                         },
                         legend: {
                           labels: {
-                            colors: "#000т",
+                            colors: "#000",
                           },
                           position: "top",
                         },
