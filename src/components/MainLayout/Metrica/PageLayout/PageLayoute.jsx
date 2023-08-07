@@ -7,11 +7,10 @@ import * as SC from "./PageLayoute.styled";
 import { useParams, useNavigate, useOutletContext } from "react-router-dom";
 import { MessageBox } from "components/MainLayout/MessageBox";
 import { ChartGroupContainer } from "./ChartGroupContainer/ChartGroupContainer";
-import { useGetPageConfigQuery } from "redux/API/pageChartsApi";
+// import { useGetPageConfigQuery } from "redux/API/pageChartsApi";
 import { LayoutToolbar } from "components/MainLayout/LayoutToolbar/LayoutToolbar";
 import { DNDSwitch } from "components/MainLayout/Metrica/PageLayout/DNDSwitch";
-import { RefreshBtn } from "components/MainLayout/RefreshBtn";
-import { flexGrow } from "styled-system";
+// import { RefreshBtn } from "components/MainLayout/RefreshBtn";
 
 const PageLayoute = ({ cabinet }) => {
   const [setSubMenu] = useOutletContext();
@@ -23,7 +22,7 @@ const PageLayoute = ({ cabinet }) => {
   const [value, setValue] = useState(0);
   const params = useParams();
   const navigate = useNavigate();
-  const paramsValues = Object.values(params);
+  // const paramsValues = Object.values(params);
 
   // const { currentData, refetch, isFetching } = useGetPageConfigQuery(
   //   paramsValues[paramsValues.length - 1]
