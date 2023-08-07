@@ -14,6 +14,7 @@ export const RefreshBtn = ({ onClick, isFetching }) => {
         minWidth: "auto",
         color: "#000",
         justifySelf: "flex-start",
+        mr: "auto",
 
         "&:hover": {
           backgroundColor: "#000",
