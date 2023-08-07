@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
-import { metricaPages } from "../../../../pagesConfig";
+
+import { metricaPages, metricaPagesCabinet } from "../../../pagesConfig";
 import * as SC from "./PageLayoute.styled";
 
 import { useParams, useNavigate, useOutletContext } from "react-router-dom";
@@ -11,7 +12,7 @@ import { LayoutToolbar } from "components/MainLayout/LayoutToolbar/LayoutToolbar
 import { DNDSwitch } from "components/MainLayout/Metrica/PageLayout/DNDSwitch";
 import { RefreshBtn } from "components/MainLayout/RefreshBtn";
 
-const PageLayoute = () => {
+const PageLayoute = ({ cabinet }) => {
   const [setSubMenu] = useOutletContext();
 
   const [isDragable, setIsDragable] = useState(false);
@@ -37,8 +38,12 @@ const PageLayoute = () => {
   };
 
   useEffect(() => {
-    setSubMenu(metricaPages);
-  }, [setSubMenu]);
+    if (cabinet) {
+      setSubMenu(metricaPagesCabinet);
+    } else {
+      setSubMenu(metricaPages);
+    }
+  }, [cabinet, setSubMenu]);
 
   useEffect(() => {
     const pageParams = Object.entries(params);
@@ -54,6 +59,15 @@ const PageLayoute = () => {
       let newAcc = acc.children.find((item) => item.id === elem[1]);
       if (elem[0] === "sub" && newAcc?.children) {
         setSubNav(newAcc.children);
+        if (params.group) {
+          const index = newAcc.children.findIndex(
+            (item) => item.id === params.group
+          );
+          setValue(index);
+        } else {
+          setValue(0);
+          navigate(newAcc.children[0].url);
+        }
       } else if (elem[0] === "sub" && !newAcc?.children) {
         setSubNav([]);
       }
@@ -75,6 +89,7 @@ const PageLayoute = () => {
     }
   }, [currentData]);
   console.log(chartsGroups);
+
   return (
     <SC.PageLayoutContainerStyled>
       {currentPageConfig && (

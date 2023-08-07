@@ -20,31 +20,69 @@ function App() {
   return (
     <Routes>
       <Route
-        path="/login"
+        path="/cabinet/login"
         element={
-          <RestrictedRoute component={Auth} redirectTo={"/metrica/home/all"} />
+          <RestrictedRoute
+            component={<Auth />}
+            redirectTo={"/analytics/home/all"}
+          />
         }
       />
       <Route path="/" element={<SharedLayout />}>
-        <Route index element={<Navigate to={"/metrica/home/all"} />} />
+        <Route index element={<Navigate to={"/analytics/home/all"} />} />
 
-        <Route path="/metrica/:page" element={<PageLayoute />}>
-          <Route path="/metrica/:page/:sub" element={<PageLayoute />}>
+        <Route path="/analytics/:page" element={<PageLayoute />}>
+          <Route path="/analytics/:page/:sub" element={<PageLayoute />}>
             <Route
-              path="/metrica/:page/:sub/:group"
+              path="/analytics/:page/:sub/:group"
               element={<PageLayoute />}
             />
           </Route>
         </Route>
 
+        <Route path="404" element={<NotFound />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+
+      <Route
+        path="/cabinet"
+        element={
+          <PrivateRoute
+            component={<SharedLayout cabinet />}
+            redirectTo="/cabinet/login"
+          />
+        }
+      >
         <Route
-          path="/cabinet/:page"
-          element={<PrivateRoute component={CabinetPage} redirectTo="/login" />}
+          index
+          element={<Navigate to={"/cabinet/analytics/home/all"} />}
+        />
+
+        <Route
+          path="/cabinet/analytics/:page"
+          element={<PageLayoute cartsAll cabinet />}
         >
           <Route
-            path="/cabinet/:page/:sub"
+            path="/cabinet/analytics/:page/:sub"
+            element={<PageLayoute cartsAll cabinet />}
+          >
+            <Route
+              path="/cabinet/analytics/:page/:sub/:group"
+              element={<PageLayoute cartsAll cabinet />}
+            />
+          </Route>
+        </Route>
+
+        <Route
+          path="/cabinet/profile/:page"
+          element={
+            <PrivateRoute component={<CabinetPage />} redirectTo="/login" />
+          }
+        >
+          <Route
+            path="/cabinet/profile/:page/:sub"
             element={
-              <PrivateRoute component={CabinetPage} redirectTo="/login" />
+              <PrivateRoute component={<CabinetPage />} redirectTo="/login" />
             }
           />
         </Route>

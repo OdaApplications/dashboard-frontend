@@ -21,7 +21,7 @@ export const UserProfile = ({
   const logoutHandler = async () => {
     try {
       await logout();
-      navigate("/login");
+      navigate("/cabinet/login");
     } catch (error) {
       console.log(error);
     }
@@ -55,11 +55,8 @@ export const UserProfile = ({
             }}
           >
             <SC.UserName>
-              {`${user.firstName} ${user.lastName} ${
-                user.surname && user.surname
-              }`}
+              {user.structureName ? user.structureName : "Інформація відсутня"}
             </SC.UserName>
-            <SC.UserPosition>{user.position}</SC.UserPosition>
           </Box>
           <Box component={"ul"} sx={{ width: "100%" }}>
             <SC.UserInfoWrapper>

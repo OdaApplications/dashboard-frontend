@@ -30,7 +30,7 @@ export const MobileProfileMenu = ({ mobileMenuId }) => {
     try {
       await logout();
       handleClose();
-      navigate("/login");
+      navigate("/cabinet/login");
     } catch (error) {
       console.log(error);
     }
@@ -38,7 +38,7 @@ export const MobileProfileMenu = ({ mobileMenuId }) => {
 
   const ProfileLinKHandler = () => {
     handleClose();
-    navigate("/cabinet/messages/all");
+    navigate("/cabinet/profile/messages/all");
   };
 
   return (

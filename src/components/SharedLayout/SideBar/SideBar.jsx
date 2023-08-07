@@ -5,9 +5,10 @@ import { NavList } from "./NavList/NavList";
 import { Box, Divider } from "@mui/material";
 
 import * as SC from "./SideBar.styled";
-import { mainPages } from "../../../pagesConfig";
 
-export default function MiniDrawer({ open, setOpen, subMenu }) {
+import { mainPages, mainPagesCabinet } from "../../pagesConfig";
+
+export default function MiniDrawer({ cabinet, open, setOpen, subMenu }) {
   const params = useParams();
 
   return (
@@ -21,7 +22,7 @@ export default function MiniDrawer({ open, setOpen, subMenu }) {
           open={open}
           setOpen={setOpen}
           navRoutes={params}
-          subMenu={mainPages}
+          subMenu={cabinet ? mainPagesCabinet : mainPages}
         />
 
         <Divider
