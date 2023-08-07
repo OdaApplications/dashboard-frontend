@@ -35,7 +35,7 @@ export const ChartConstructor = ({ chart, groupFilter }) => {
             aditionalSetings={aditionalSetings}
           />
         )}
-        {/* <TypeChart filter={filter} chartConfig={chart.chartConfig} /> */}
+        <TypeChart filter={filter} chartConfig={chart.chartConfig} />
       </SC.BoxChartContainer>
     </SC.CahrtConstructorWrapper>
   );

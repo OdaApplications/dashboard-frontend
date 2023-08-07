@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 export const LayoutToolBarContainerStyled = styled(Box)((props) => ({
   display: "flex",
   alignItems: "center",
-  justifyContent: "space-between",
+  justifyContent: "center",
   backgroundColor: "#fff",
   borderRadius: "12px ",
   position: "relative",

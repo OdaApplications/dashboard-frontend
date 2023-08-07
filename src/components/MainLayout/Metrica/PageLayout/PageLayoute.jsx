@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 
-import { metricaPages, metricaPagesCabinet } from "../../../pagesConfig";
+import { metricaPages, metricaPagesCabinet } from "pagesConfig";
 import * as SC from "./PageLayoute.styled";
 
 import { useParams, useNavigate, useOutletContext } from "react-router-dom";
@@ -11,6 +11,7 @@ import { useGetPageConfigQuery } from "redux/API/pageChartsApi";
 import { LayoutToolbar } from "components/MainLayout/LayoutToolbar/LayoutToolbar";
 import { DNDSwitch } from "components/MainLayout/Metrica/PageLayout/DNDSwitch";
 import { RefreshBtn } from "components/MainLayout/RefreshBtn";
+import { flexGrow } from "styled-system";
 
 const PageLayoute = ({ cabinet }) => {
   const [setSubMenu] = useOutletContext();
@@ -24,14 +25,9 @@ const PageLayoute = ({ cabinet }) => {
   const navigate = useNavigate();
   const paramsValues = Object.values(params);
 
-  const { currentData, refetch, isFetching } = useGetPageConfigQuery(
-    paramsValues[paramsValues.length - 1]
-  );
-
-  console.log(currentData?.data?.chartsGroups[0].charts);
-  console.log(
-    currentData && JSON.parse(currentData?.data?.chartsGroups[0]?.charts)
-  );
+  // const { currentData, refetch, isFetching } = useGetPageConfigQuery(
+  //   paramsValues[paramsValues.length - 1]
+  // );
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -80,22 +76,23 @@ const PageLayoute = ({ cabinet }) => {
       return;
     }
     setCurrentPageConfig(pageConfig);
-    // setChartsGroups(pageConfig?.chartsGroups || []);
+    setChartsGroups(pageConfig?.chartsGroups || []);
   }, [navigate, params]);
 
-  useEffect(() => {
-    if (currentData) {
-      setChartsGroups(currentData?.data?.chartsGroups || []);
-    }
-  }, [currentData]);
-  console.log(chartsGroups);
+  // useEffect(() => {
+  //   if (currentData) {
+  //     setChartsGroups(currentData?.data?.chartsGroups || []);
+  //   }
+  // }, [currentData]);
+  // console.log(chartsGroups);
 
   return (
     <SC.PageLayoutContainerStyled>
       {currentPageConfig && (
         <>
           <LayoutToolbar>
-            <RefreshBtn onClick={refetch} isFetching={isFetching} />
+            {/* <RefreshBtn onClick={refetch} isFetching={isFetching} /> */}
+            <Box sx={{ flexGrow: 1 }} />
             {subNav.length > 0 && (
               <Box sx={{ maxWidth: "100%" }}>
                 <SC.PageLayoutTabs
@@ -115,7 +112,13 @@ const PageLayoute = ({ cabinet }) => {
                 </SC.PageLayoutTabs>
               </Box>
             )}
-            <DNDSwitch isDragable={isDragable} setIsDragable={setIsDragable} />
+            <Box sx={{ flexGrow: 1 }} />
+            {cabinet && (
+              <DNDSwitch
+                isDragable={isDragable}
+                setIsDragable={setIsDragable}
+              />
+            )}
           </LayoutToolbar>
           {chartsGroups.length === 0 ? (
             <Box sx={{ mt: "20vh" }}>

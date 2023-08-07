@@ -6,7 +6,7 @@ import { Box, Divider } from "@mui/material";
 
 import * as SC from "./SideBar.styled";
 
-import { mainPages, mainPagesCabinet } from "../../pagesConfig";
+import { mainPages, mainPagesCabinet } from "pagesConfig";
 
 export default function MiniDrawer({ cabinet, open, setOpen, subMenu }) {
   const params = useParams();

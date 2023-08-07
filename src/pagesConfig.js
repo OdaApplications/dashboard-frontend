@@ -29,7 +29,7 @@ export const mainPagesCabinet = [
     id: "analytics",
     title: "Аналітика",
     menuTitle: "Аналітика",
-    url: "cabinet/analytics/home/all",
+    url: "/cabinet/analytics/home/all",
     type: "noCollapse",
     icon: <QueryStats />,
     color: "#FF6931",
