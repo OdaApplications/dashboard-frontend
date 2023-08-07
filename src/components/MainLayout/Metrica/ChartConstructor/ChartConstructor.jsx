@@ -18,7 +18,7 @@ export const ChartConstructor = ({ chart, groupFilter }) => {
   const TypeChart = ChartsGenetrators[chart?.chartConfig.type];
   const { aditionalSetings = null } = chart?.chartConfig;
 
-  console.log("chart", chart);
+
 
   return (
     <SC.CahrtConstructorWrapper>

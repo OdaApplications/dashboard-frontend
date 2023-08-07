@@ -1,22 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import { Suspense } from "react";
 import Box from "@mui/material/Box";
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import SideBar from "./SideBar/SideBar";
+import { setPerson } from "redux/person/personSlice";
+import { useDispatch } from "react-redux";
 
-const SharedLayout = ({ cabinet, children }) => {
+const SharedLayout = ({ person, children }) => {
   const [open, setOpen] = useState(false);
   const [subMenu, setSubMenu] = useState(null);
 
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setPerson(person));
+  }, [dispatch, person]);
+
   return (
     <Box sx={{ height: "100vh", display: "flex", flexDirection: "column" }}>
-      <Header
-        cabinet={cabinet}
-        open={open}
-        setOpen={setOpen}
-        subMenu={subMenu}
-      />
+      <Header open={open} setOpen={setOpen} subMenu={subMenu} />
       <Box
         sx={{
           display: "flex",
@@ -25,7 +27,7 @@ const SharedLayout = ({ cabinet, children }) => {
         }}
       >
         <SideBar
-          cabinet={cabinet}
+          person={person}
           open={open}
           setOpen={setOpen}
           subMenu={subMenu}

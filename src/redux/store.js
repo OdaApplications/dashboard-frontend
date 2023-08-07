@@ -14,6 +14,7 @@ import storage from "redux-persist/lib/storage";
 
 import { authSlice } from "./auth/authSlice";
 import { api } from "./API/API";
+import { personSlice } from "./person/personSlice";
 
 const persistConfig = {
   key: "token",
@@ -27,6 +28,7 @@ export const store = configureStore({
   reducer: {
     [authSlice.name]: persistedAuthReducer,
     [api.reducerPath]: api.reducer,
+    [personSlice.name]: personSlice.reducer,
   },
   middleware: (getDefaultMiddleware) => [
     ...getDefaultMiddleware({

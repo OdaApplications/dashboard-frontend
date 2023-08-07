@@ -3,6 +3,7 @@ import { Select } from "./Select";
 import * as SC from "./FilterSelects.styled";
 import { useSelector } from "react-redux";
 import { selectUser } from "redux/auth/authSlice";
+import { selectPerson } from "redux/person/personSlice";
 
 export const FilterSelects = ({
   filterSelects,
@@ -12,9 +13,13 @@ export const FilterSelects = ({
 }) => {
   const [filterValue, setFilterValue] = useState({});
   const [userFilterPosition, setUserFilterPosition] = useState(0);
+
+  const person = useSelector(selectPerson);
   const user = useSelector(selectUser);
 
   useEffect(() => {
+    if (person === "public") return;
+
     if (user && user.access && filterSelects) {
       let position = 0;
       let currentObj = filterSelects[0];
@@ -26,7 +31,7 @@ export const FilterSelects = ({
       }
       setUserFilterPosition(position);
     }
-  }, [filterSelects, user, userFilterPosition]);
+  }, [filterSelects, person, user]);
 
   useEffect(() => {
     if (Object.keys(filterValue).length > 0) {
@@ -49,7 +54,7 @@ export const FilterSelects = ({
           userFilterPosition={userFilterPosition}
           setUserFilterPosition={setUserFilterPosition}
           data={data}
-          user={user}
+          user={person === "cabinet" && user}
         />
       ))}
     </SC.FilterSelectsList>
