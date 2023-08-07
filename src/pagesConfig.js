@@ -63,6 +63,7 @@ export const metricaPages = [
                 size: "sl",
                 location: { x: 0, y: 0 },
                 title: "Цифровізація",
+                public: true,
                 chartConfig: {
                   options: {
                     chart: {
@@ -95,6 +96,7 @@ export const metricaPages = [
                 size: "sl",
                 location: { x: 6, y: 0 },
                 title: "Інфраструктура",
+                public: true,
                 chartConfig: {
                   options: {
                     chart: {
@@ -127,6 +129,7 @@ export const metricaPages = [
                 size: "sl",
                 location: { x: 0, y: 2 },
                 title: "Охорона здоров'я",
+                public: true,
                 chartConfig: {
                   options: {
                     chart: {
@@ -159,6 +162,7 @@ export const metricaPages = [
                 size: "sl",
                 location: { x: 6, y: 2 },
                 title: "Освіта",
+                public: true,
                 chartConfig: {
                   options: {
                     chart: {
@@ -191,6 +195,7 @@ export const metricaPages = [
                 size: "sl",
                 location: { x: 0, y: 4 },
                 title: "Економіка",
+                public: true,
                 chartConfig: {
                   options: {
                     chart: {
@@ -257,6 +262,7 @@ export const metricaPages = [
                     size: "m",
                     title: "Усі центри",
                     location: { x: 0, y: 0 },
+                    public: false,
                     chartConfig: {
                       options: {
                         chart: {
@@ -401,6 +407,7 @@ export const metricaPages = [
                     size: "mtl",
                     location: { x: 4, y: 0 },
                     title: "ЦНАПи",
+                    public: false,
                     chartConfig: {
                       options: {
                         chart: {
@@ -549,6 +556,7 @@ export const metricaPages = [
                     size: "sl",
                     location: { x: 0, y: 0 },
                     title: "Рейтинг по районам",
+                    public: false,
                     chartConfig: {
                       options: {
                         chart: {
@@ -588,6 +596,7 @@ export const metricaPages = [
                     size: "sl",
                     location: { x: 6, y: 0 },
                     title: "Топ 5 громад",
+                    public: false,
                     chartConfig: {
                       options: {
                         chart: {
@@ -626,6 +635,7 @@ export const metricaPages = [
                     size: "mtl",
                     location: { x: 0, y: 4 },
                     title: "Перегляд по окремим районам та громадам",
+                    public: true,
                     chartConfig: {
                       options: {
                         chart: {
@@ -923,6 +933,7 @@ export const metricaPages = [
                     location: { x: 0, y: 8 },
                     title:
                       "Наявні рішення для обслуговування осіб з порушенням зору ",
+                    public: true,
                     chartConfig: {
                       options: {
                         chart: {
@@ -1209,6 +1220,7 @@ export const metricaPages = [
                     location: { x: 8, y: 4 },
                     title:
                       "Наявні рішення для обслуговування осіб з порушенням слуху ",
+                    public: true,
                     chartConfig: {
                       options: {
                         chart: {
@@ -1524,6 +1536,7 @@ export const metricaPages = [
                     id: "b",
                     size: "s",
                     location: { x: 1, y: 0 },
+                    public: true,
                     chartConfig: {
                       options: {
                         text: "Передбачене фінансування",
@@ -1624,6 +1637,7 @@ export const metricaPages = [
                     size: "sl",
                     location: { x: 6, y: 0 },
                     title: "Програма доступності",
+                    public: true,
                     chartConfig: {
                       options: {
                         chart: {
@@ -1738,6 +1752,7 @@ export const metricaPages = [
                     size: "s",
                     location: { x: 0, y: 2 },
                     title: "Вуличні перехрестя",
+                    public: true,
                     chartConfig: {
                       options: {
                         chart: {
@@ -1852,6 +1867,7 @@ export const metricaPages = [
                     size: "s",
                     location: { x: 4, y: 2 },
                     title: "Адмінбудівлі владних структур",
+                    public: true,
                     chartConfig: {
                       options: {
                         chart: {
@@ -1966,6 +1982,7 @@ export const metricaPages = [
                     size: "s",
                     location: { x: 8, y: 2 },
                     title: "Об'єкти соціального захисту",
+                    public: true,
                     chartConfig: {
                       options: {
                         chart: {
@@ -2080,6 +2097,7 @@ export const metricaPages = [
                     size: "s",
                     location: { x: 0, y: 4 },
                     title: "План заходів",
+                    public: true,
                     chartConfig: {
                       options: {
                         chart: {
@@ -2194,6 +2212,7 @@ export const metricaPages = [
                     size: "s",
                     location: { x: 4, y: 4 },
                     title: "Об'єкти охорони здоров'я",
+                    public: true,
                     chartConfig: {
                       options: {
                         chart: {
@@ -2308,6 +2327,7 @@ export const metricaPages = [
                     size: "s",
                     location: { x: 8, y: 4 },
                     title: "Заклади освіти",
+                    public: true,
                     chartConfig: {
                       options: {
                         chart: {
@@ -2422,6 +2442,7 @@ export const metricaPages = [
                     size: "s",
                     location: { x: 4, y: 6 },
                     title: "Об'єкти укриття",
+                    public: true,
                     chartConfig: {
                       options: {
                         chart: {
@@ -2565,6 +2586,7 @@ export const metricaPages = [
                 size: "mtl",
                 location: { x: 0, y: 0 },
                 title: "е-Щоденник",
+                public: true,
                 chartConfig: {
                   options: {
                     chart: {
@@ -2696,6 +2718,7 @@ export const metricaPages = [
                 size: "mtl",
                 location: { x: 6, y: 0 },
                 title: "е-Журнал",
+                public: true,
                 chartConfig: {
                   options: {
                     chart: {
@@ -2855,6 +2878,7 @@ export const metricaPages = [
                 id: "a",
                 size: "s",
                 location: { x: 0, y: 0 },
+                public: true,
                 chartConfig: {
                   options: {
                     text: "Загальна кількість укриттів",
@@ -2868,6 +2892,7 @@ export const metricaPages = [
                 size: "lh",
                 location: { x: 4, y: 0 },
                 title: "Безперешкодність та доступність укриттів",
+                public: true,
                 chartConfig: {
                   options: {
                     chart: {
@@ -3031,6 +3056,7 @@ export const metricaPages = [
                 id: "a",
                 size: "s",
                 location: { x: 0, y: 0 },
+                public: true,
                 chartConfig: {
                   options: {
                     text: "Середнє значення",
@@ -3044,6 +3070,7 @@ export const metricaPages = [
                 size: "lh",
                 location: { x: 4, y: 0 },
                 title: "Загальний рейтинг голів громад",
+                public: true,
                 chartConfig: {
                   options: {
                     chart: {
@@ -3235,6 +3262,7 @@ export const metricaPagesCabinet = [
                 size: "sl",
                 location: { x: 0, y: 0 },
                 title: "Цифровізація",
+                public: true,
                 chartConfig: {
                   options: {
                     chart: {
@@ -3267,6 +3295,7 @@ export const metricaPagesCabinet = [
                 size: "sl",
                 location: { x: 6, y: 0 },
                 title: "Інфраструктура",
+                public: true,
                 chartConfig: {
                   options: {
                     chart: {
@@ -3299,6 +3328,7 @@ export const metricaPagesCabinet = [
                 size: "sl",
                 location: { x: 0, y: 2 },
                 title: "Охорона здоров'я",
+                public: true,
                 chartConfig: {
                   options: {
                     chart: {
@@ -3331,6 +3361,7 @@ export const metricaPagesCabinet = [
                 size: "sl",
                 location: { x: 6, y: 2 },
                 title: "Освіта",
+                public: true,
                 chartConfig: {
                   options: {
                     chart: {
@@ -3363,6 +3394,7 @@ export const metricaPagesCabinet = [
                 size: "sl",
                 location: { x: 0, y: 4 },
                 title: "Економіка",
+                public: true,
                 chartConfig: {
                   options: {
                     chart: {
@@ -3429,6 +3461,7 @@ export const metricaPagesCabinet = [
                     size: "m",
                     title: "Усі центри",
                     location: { x: 0, y: 0 },
+                    public: true,
                     chartConfig: {
                       options: {
                         chart: {
@@ -3573,6 +3606,7 @@ export const metricaPagesCabinet = [
                     size: "mtl",
                     location: { x: 4, y: 0 },
                     title: "ЦНАПи",
+                    public: true,
                     chartConfig: {
                       options: {
                         chart: {
@@ -3721,6 +3755,7 @@ export const metricaPagesCabinet = [
                     size: "sl",
                     location: { x: 0, y: 0 },
                     title: "Рейтинг по районам",
+                    public: true,
                     chartConfig: {
                       options: {
                         chart: {
@@ -3760,6 +3795,7 @@ export const metricaPagesCabinet = [
                     size: "sl",
                     location: { x: 6, y: 0 },
                     title: "Топ 5 громад",
+                    public: true,
                     chartConfig: {
                       options: {
                         chart: {
@@ -3798,6 +3834,7 @@ export const metricaPagesCabinet = [
                     size: "mtl",
                     location: { x: 0, y: 4 },
                     title: "Перегляд по окремим районам та громадам",
+                    public: true,
                     chartConfig: {
                       options: {
                         chart: {
@@ -4095,6 +4132,7 @@ export const metricaPagesCabinet = [
                     location: { x: 0, y: 8 },
                     title:
                       "Наявні рішення для обслуговування осіб з порушенням зору ",
+                    public: true,
                     chartConfig: {
                       options: {
                         chart: {
@@ -4381,6 +4419,7 @@ export const metricaPagesCabinet = [
                     location: { x: 8, y: 4 },
                     title:
                       "Наявні рішення для обслуговування осіб з порушенням слуху ",
+                    public: true,
                     chartConfig: {
                       options: {
                         chart: {
@@ -4696,6 +4735,7 @@ export const metricaPagesCabinet = [
                     id: "b",
                     size: "s",
                     location: { x: 1, y: 0 },
+                    public: true,
                     chartConfig: {
                       options: {
                         text: "Передбачене фінансування",
@@ -4796,6 +4836,7 @@ export const metricaPagesCabinet = [
                     size: "sl",
                     location: { x: 6, y: 0 },
                     title: "Програма доступності",
+                    public: true,
                     chartConfig: {
                       options: {
                         chart: {
@@ -4910,6 +4951,7 @@ export const metricaPagesCabinet = [
                     size: "s",
                     location: { x: 0, y: 2 },
                     title: "Вуличні перехрестя",
+                    public: true,
                     chartConfig: {
                       options: {
                         chart: {
@@ -5024,6 +5066,7 @@ export const metricaPagesCabinet = [
                     size: "s",
                     location: { x: 4, y: 2 },
                     title: "Адмінбудівлі владних структур",
+                    public: true,
                     chartConfig: {
                       options: {
                         chart: {
@@ -5138,6 +5181,7 @@ export const metricaPagesCabinet = [
                     size: "s",
                     location: { x: 8, y: 2 },
                     title: "Об'єкти соціального захисту",
+                    public: true,
                     chartConfig: {
                       options: {
                         chart: {
@@ -5252,6 +5296,7 @@ export const metricaPagesCabinet = [
                     size: "s",
                     location: { x: 0, y: 4 },
                     title: "План заходів",
+                    public: true,
                     chartConfig: {
                       options: {
                         chart: {
@@ -5366,6 +5411,7 @@ export const metricaPagesCabinet = [
                     size: "s",
                     location: { x: 4, y: 4 },
                     title: "Об'єкти охорони здоров'я",
+                    public: true,
                     chartConfig: {
                       options: {
                         chart: {
@@ -5480,6 +5526,7 @@ export const metricaPagesCabinet = [
                     size: "s",
                     location: { x: 8, y: 4 },
                     title: "Заклади освіти",
+                    public: true,
                     chartConfig: {
                       options: {
                         chart: {
@@ -5594,6 +5641,7 @@ export const metricaPagesCabinet = [
                     size: "s",
                     location: { x: 4, y: 6 },
                     title: "Об'єкти укриття",
+                    public: true,
                     chartConfig: {
                       options: {
                         chart: {
@@ -5737,6 +5785,7 @@ export const metricaPagesCabinet = [
                 size: "mtl",
                 location: { x: 0, y: 0 },
                 title: "е-Щоденник",
+                public: true,
                 chartConfig: {
                   options: {
                     chart: {
@@ -5868,6 +5917,7 @@ export const metricaPagesCabinet = [
                 size: "mtl",
                 location: { x: 6, y: 0 },
                 title: "е-Журнал",
+                public: true,
                 chartConfig: {
                   options: {
                     chart: {
@@ -6027,6 +6077,7 @@ export const metricaPagesCabinet = [
                 id: "a",
                 size: "s",
                 location: { x: 0, y: 0 },
+                public: true,
                 chartConfig: {
                   options: {
                     text: "Загальна кількість укриттів",
@@ -6040,6 +6091,7 @@ export const metricaPagesCabinet = [
                 size: "lh",
                 location: { x: 4, y: 0 },
                 title: "Безперешкодність та доступність укриттів",
+                public: true,
                 chartConfig: {
                   options: {
                     chart: {
@@ -6203,6 +6255,7 @@ export const metricaPagesCabinet = [
                 id: "a",
                 size: "s",
                 location: { x: 0, y: 0 },
+                public: true,
                 chartConfig: {
                   options: {
                     text: "Середнє значення",
@@ -6216,6 +6269,7 @@ export const metricaPagesCabinet = [
                 size: "lh",
                 location: { x: 4, y: 0 },
                 title: "Загальний рейтинг голів громад",
+                public: true,
                 chartConfig: {
                   options: {
                     chart: {

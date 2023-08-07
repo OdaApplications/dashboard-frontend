@@ -10,9 +10,11 @@ import { ChartGroupContainer } from "./ChartGroupContainer/ChartGroupContainer";
 // import { useGetPageConfigQuery } from "redux/API/pageChartsApi";
 import { LayoutToolbar } from "components/MainLayout/LayoutToolbar/LayoutToolbar";
 import { DNDSwitch } from "components/MainLayout/Metrica/PageLayout/DNDSwitch";
-// import { RefreshBtn } from "components/MainLayout/RefreshBtn";
+import { RefreshBtn } from "components/MainLayout/RefreshBtn";
+import { useSelector } from "react-redux";
+import { selectPerson } from "redux/person/personSlice";
 
-const PageLayoute = ({ cabinet }) => {
+const PageLayoute = () => {
   const [setSubMenu] = useOutletContext();
 
   const [isDragable, setIsDragable] = useState(false);
@@ -22,6 +24,7 @@ const PageLayoute = ({ cabinet }) => {
   const [value, setValue] = useState(0);
   const params = useParams();
   const navigate = useNavigate();
+  const person = useSelector(selectPerson);
   // const paramsValues = Object.values(params);
 
   // const { currentData, refetch, isFetching } = useGetPageConfigQuery(
@@ -33,12 +36,12 @@ const PageLayoute = ({ cabinet }) => {
   };
 
   useEffect(() => {
-    if (cabinet) {
+    if (person === "cabinet") {
       setSubMenu(metricaPagesCabinet);
     } else {
       setSubMenu(metricaPages);
     }
-  }, [cabinet, setSubMenu]);
+  }, [person, setSubMenu]);
 
   useEffect(() => {
     const pageParams = Object.entries(params);
@@ -90,7 +93,7 @@ const PageLayoute = ({ cabinet }) => {
       {currentPageConfig && (
         <>
           <LayoutToolbar>
-            {/* <RefreshBtn onClick={refetch} isFetching={isFetching} /> */}
+            <RefreshBtn />
             <Box sx={{ flexGrow: 1 }} />
             {subNav.length > 0 && (
               <Box sx={{ maxWidth: "100%" }}>
@@ -112,7 +115,7 @@ const PageLayoute = ({ cabinet }) => {
               </Box>
             )}
             <Box sx={{ flexGrow: 1 }} />
-            {cabinet && (
+            {person === "cabinet" && (
               <DNDSwitch
                 isDragable={isDragable}
                 setIsDragable={setIsDragable}
@@ -126,6 +129,7 @@ const PageLayoute = ({ cabinet }) => {
           ) : (
             chartsGroups.map((item, index) => (
               <ChartGroupContainer
+                person={person}
                 isDragable={isDragable}
                 key={index}
                 chartGroup={item}

@@ -28,14 +28,20 @@ function App() {
           />
         }
       />
-      <Route path="/" element={<SharedLayout />}>
+      <Route path="/" element={<SharedLayout person={"public"} />}>
         <Route index element={<Navigate to={"/analytics/home/all"} />} />
 
-        <Route path="/analytics/:page" element={<PageLayoute />}>
-          <Route path="/analytics/:page/:sub" element={<PageLayoute />}>
+        <Route
+          path="/analytics/:page"
+          element={<PageLayoute chartsAcess={"public"} />}
+        >
+          <Route
+            path="/analytics/:page/:sub"
+            element={<PageLayoute chartsAcess={"public"} />}
+          >
             <Route
               path="/analytics/:page/:sub/:group"
-              element={<PageLayoute />}
+              element={<PageLayoute chartsAcess={"public"} />}
             />
           </Route>
         </Route>
@@ -48,7 +54,7 @@ function App() {
         path="/cabinet"
         element={
           <PrivateRoute
-            component={<SharedLayout cabinet />}
+            component={<SharedLayout person={"cabinet"} />}
             redirectTo="/cabinet/login"
           />
         }
@@ -60,15 +66,15 @@ function App() {
 
         <Route
           path="/cabinet/analytics/:page"
-          element={<PageLayoute cartsAll cabinet />}
+          element={<PageLayoute chartsAcess={"all"} cabinet />}
         >
           <Route
             path="/cabinet/analytics/:page/:sub"
-            element={<PageLayoute cartsAll cabinet />}
+            element={<PageLayoute chartsAcess={"all"} cabinet />}
           >
             <Route
               path="/cabinet/analytics/:page/:sub/:group"
-              element={<PageLayoute cartsAll cabinet />}
+              element={<PageLayoute chartsAcess={"all"} cabinet />}
             />
           </Route>
         </Route>

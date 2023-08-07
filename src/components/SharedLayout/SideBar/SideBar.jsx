@@ -8,7 +8,7 @@ import * as SC from "./SideBar.styled";
 
 import { mainPages, mainPagesCabinet } from "pagesConfig";
 
-export default function MiniDrawer({ cabinet, open, setOpen, subMenu }) {
+export default function MiniDrawer({ person, open, setOpen, subMenu }) {
   const params = useParams();
 
   return (
@@ -22,7 +22,7 @@ export default function MiniDrawer({ cabinet, open, setOpen, subMenu }) {
           open={open}
           setOpen={setOpen}
           navRoutes={params}
-          subMenu={cabinet ? mainPagesCabinet : mainPages}
+          subMenu={person === "cabinet" ? mainPagesCabinet : mainPages}
         />
 
         <Divider

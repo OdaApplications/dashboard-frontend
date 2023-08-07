@@ -7,11 +7,13 @@ import * as SC from "./Header.styled";
 import { CurrentPageTitle } from "./CurrentPageTitle/CurrentPageTitle";
 
 import { ProfileNav } from "./ProfileNav/ProfileNav";
+import { useSelector } from "react-redux";
+import { selectPerson } from "redux/person/personSlice";
 
-export default function Header({ cabinet, open, setOpen, subMenu }) {
-  console.log(cabinet);
+export default function Header({ open, setOpen, subMenu }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
+  const person = useSelector(selectPerson);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -50,7 +52,9 @@ export default function Header({ cabinet, open, setOpen, subMenu }) {
               edge="start"
               component="div"
               sx={{ display: { sm: `${open ? "flex" : "none"}`, lg: "flex" } }}
-              onClick={() => navigate(`${cabinet ? "/cabinet" : "/"}`)}
+              onClick={() =>
+                navigate(`${person === "cabinet" ? "/cabinet" : "/"}`)
+              }
             >
               АНАЛІТИКА
             </SC.LogoTypographyStyled>
@@ -74,7 +78,7 @@ export default function Header({ cabinet, open, setOpen, subMenu }) {
           <Box sx={{ flexGrow: 1 }} />
           <CurrentPageTitle open={open} subMenu={subMenu} />
           <Box sx={{ flexGrow: 1 }} />
-          {cabinet && (
+          {person === "cabinet" && (
             <ProfileNav
               menuId={menuId}
               mobileMenuId={mobileMenuId}

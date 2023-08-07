@@ -3,7 +3,7 @@ import * as SC from "./ChartDonut.styled";
 
 export const ChartDonut = ({ chartConfig, filter }) => {
   const [currentSeries, setCurrentSeries] = useState([]);
-  console.log("chartConfig", chartConfig);
+
   useEffect(() => {
     if (chartConfig?.series) {
       setCurrentSeries(chartConfig.series);

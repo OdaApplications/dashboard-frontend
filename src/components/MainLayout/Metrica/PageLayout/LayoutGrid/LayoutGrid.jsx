@@ -27,8 +27,7 @@ export const LayoutGrid = ({ charts: newCharts, groupFilter, isDragable }) => {
   useEffect(() => {
     setCharts(newCharts);
   }, [newCharts]);
-  console.log("newCharts", newCharts);
-  console.log("charts", charts);
+
   useEffect(() => {
     if (!charts) {
       setLayout([]);
