@@ -5,13 +5,18 @@ import { Outlet } from "react-router-dom";
 import Header from "../MainLayout/Header";
 import SideBar from "../SideBar/SideBar";
 
-const SharedLayout = ({ children }) => {
+const SharedLayout = ({ cabinet, children }) => {
   const [open, setOpen] = useState(false);
   const [subMenu, setSubMenu] = useState(null);
 
   return (
     <Box sx={{ height: "100vh", display: "flex", flexDirection: "column" }}>
-      <Header open={open} setOpen={setOpen} subMenu={subMenu} />
+      <Header
+        cabinet={cabinet}
+        open={open}
+        setOpen={setOpen}
+        subMenu={subMenu}
+      />
       <Box
         sx={{
           display: "flex",
@@ -19,7 +24,12 @@ const SharedLayout = ({ children }) => {
           height: "calc(100% - 86px)",
         }}
       >
-        <SideBar open={open} setOpen={setOpen} subMenu={subMenu} />
+        <SideBar
+          cabinet={cabinet}
+          open={open}
+          setOpen={setOpen}
+          subMenu={subMenu}
+        />
         <Box
           sx={{
             display: "flex",

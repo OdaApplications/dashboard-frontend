@@ -8,7 +8,8 @@ import { CurrentPageTitle } from "./CurrentPageTitle/CurrentPageTitle";
 
 import { ProfileNav } from "./ProfileNav/ProfileNav";
 
-export default function PrimarySearchAppBar({ open, setOpen, subMenu }) {
+export default function Header({ cabinet, open, setOpen, subMenu }) {
+  console.log(cabinet);
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
 
@@ -49,9 +50,9 @@ export default function PrimarySearchAppBar({ open, setOpen, subMenu }) {
               edge="start"
               component="div"
               sx={{ display: { sm: `${open ? "flex" : "none"}`, lg: "flex" } }}
-              onClick={() => navigate("/")}
+              onClick={() => navigate(`${cabinet ? "/cabinet" : "/"}`)}
             >
-              METRICA
+              АНАЛІТИКА
             </SC.LogoTypographyStyled>
             <SC.MenuButton
               size="medium"
@@ -73,13 +74,15 @@ export default function PrimarySearchAppBar({ open, setOpen, subMenu }) {
           <Box sx={{ flexGrow: 1 }} />
           <CurrentPageTitle open={open} subMenu={subMenu} />
           <Box sx={{ flexGrow: 1 }} />
-          <ProfileNav
-            menuId={menuId}
-            mobileMenuId={mobileMenuId}
-            handleProfileMenuOpen={handleProfileMenuOpen}
-            anchorEl={anchorEl}
-            handleMobileMenuClose={handleMobileMenuClose}
-          />
+          {cabinet && (
+            <ProfileNav
+              menuId={menuId}
+              mobileMenuId={mobileMenuId}
+              handleProfileMenuOpen={handleProfileMenuOpen}
+              anchorEl={anchorEl}
+              handleMobileMenuClose={handleMobileMenuClose}
+            />
+          )}
         </Toolbar>
       </AppBar>
     </SC.HeaderContainerStyled>

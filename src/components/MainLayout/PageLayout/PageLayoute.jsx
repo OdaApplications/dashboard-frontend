@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
-import { metricaPages } from "../../../pagesConfig";
+import { metricaPages, metricaPagesCabinet } from "../../../pagesConfig";
 import * as SC from "./PageLayoute.styled";
 
 import { useParams, useNavigate, useOutletContext } from "react-router-dom";
 import { MessageBox } from "components/MessageBox";
 import { ChartGroupContainer } from "./ChartGroupContainer/ChartGroupContainer";
 
-const PageLayoute = () => {
+const PageLayoute = ({ cabinet }) => {
   const [setSubMenu] = useOutletContext();
 
   const [currentPageConfig, setCurrentPageConfig] = useState(null);
@@ -15,7 +15,6 @@ const PageLayoute = () => {
   const [subNav, setSubNav] = useState([]);
   const [value, setValue] = useState(0);
   const navigate = useNavigate();
-
   const params = useParams();
 
   const handleChange = (event, newValue) => {
@@ -23,8 +22,12 @@ const PageLayoute = () => {
   };
 
   useEffect(() => {
-    setSubMenu(metricaPages);
-  }, [setSubMenu]);
+    if (cabinet) {
+      setSubMenu(metricaPagesCabinet);
+    } else {
+      setSubMenu(metricaPages);
+    }
+  }, [cabinet, setSubMenu]);
 
   useEffect(() => {
     const pageParams = Object.entries(params);
@@ -40,6 +43,15 @@ const PageLayoute = () => {
       let newAcc = acc.children.find((item) => item.id === elem[1]);
       if (elem[0] === "sub" && newAcc?.children) {
         setSubNav(newAcc.children);
+        if (params.group) {
+          const index = newAcc.children.findIndex(
+            (item) => item.id === params.group
+          );
+          setValue(index);
+        } else {
+          setValue(0);
+          navigate(newAcc.children[0].url);
+        }
       } else if (elem[0] === "sub" && !newAcc?.children) {
         setSubNav([]);
       }
@@ -54,6 +66,13 @@ const PageLayoute = () => {
     setCurrentPageConfig(pageConfig);
     setChartsGroups(pageConfig?.chartsGroups || []);
   }, [navigate, params]);
+
+  // useEffect(() => {
+  //   if (params.group) {
+  //     const index = subNav.findIndex((item) => item.id === params.group);
+  //     setValue(index);
+  //   }
+  // }, [params.group, subNav]);
 
   return (
     <SC.PageLayoutContainerStyled>
