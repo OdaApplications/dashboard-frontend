@@ -262,7 +262,7 @@ export const metricaPages = [
                     size: "m",
                     title: "Усі центри",
                     location: { x: 0, y: 0 },
-                    public: false,
+                    public: true,
                     chartConfig: {
                       options: {
                         chart: {
@@ -407,7 +407,7 @@ export const metricaPages = [
                     size: "mtl",
                     location: { x: 4, y: 0 },
                     title: "ЦНАПи",
-                    public: false,
+                    public: true,
                     chartConfig: {
                       options: {
                         chart: {

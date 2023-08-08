@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 
 import { metricaPages, metricaPagesCabinet } from "pagesConfig";
 import * as SC from "./PageLayoute.styled";
@@ -13,6 +13,7 @@ import { DNDSwitch } from "components/MainLayout/Metrica/PageLayout/DNDSwitch";
 import { RefreshBtn } from "components/MainLayout/RefreshBtn";
 import { useSelector } from "react-redux";
 import { selectPerson } from "redux/person/personSlice";
+import { GroupNavBar } from "./GroupNavBar/GroupNavBar";
 
 const PageLayoute = () => {
   const [setSubMenu] = useOutletContext();
@@ -25,6 +26,8 @@ const PageLayoute = () => {
   const params = useParams();
   const navigate = useNavigate();
   const person = useSelector(selectPerson);
+  const isSmallScreen = useMediaQuery("(max-width: 899px)");
+
   // const paramsValues = Object.values(params);
 
   // const { currentData, refetch, isFetching } = useGetPageConfigQuery(
@@ -96,25 +99,15 @@ const PageLayoute = () => {
             <RefreshBtn />
             <Box sx={{ flexGrow: 1 }} />
             {subNav.length > 0 && (
-              <Box sx={{ maxWidth: "100%" }}>
-                <SC.PageLayoutTabs
-                  value={value}
-                  onChange={handleChange}
-                  variant="scrollable"
-                  scrollButtons="auto"
-                  aria-label="scrollable auto tabs example"
-                >
-                  {subNav.map((item) => (
-                    <SC.PageLayoutTab
-                      key={item?.id}
-                      label={item?.title}
-                      onClick={() => navigate(item?.url)}
-                    />
-                  ))}
-                </SC.PageLayoutTabs>
-              </Box>
+              <GroupNavBar
+                isSmallScreen={isSmallScreen}
+                handleChange={handleChange}
+                value={value}
+                subNav={subNav}
+                navigate={navigate}
+              />
             )}
-            <Box sx={{ flexGrow: 1 }} />
+            {!isSmallScreen && <Box sx={{ flexGrow: 1 }} />}
             {person === "cabinet" && (
               <DNDSwitch
                 isDragable={isDragable}
