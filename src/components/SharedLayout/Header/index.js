@@ -51,7 +51,7 @@ export default function Header({ open, setOpen, subMenu }) {
               noWrap
               edge="start"
               component="div"
-              sx={{ display: { sm: `${open ? "flex" : "none"}`, lg: "flex" } }}
+              sx={{ display: { xs: `${open ? "flex" : "none"}`, lg: "flex" } }}
               onClick={() =>
                 navigate(`${person === "cabinet" ? "/cabinet" : "/"}`)
               }
