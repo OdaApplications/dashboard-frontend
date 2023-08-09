@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import TablePagination from "@mui/material/TablePagination";
 
 import * as SC from "./Messages.styled";
 import MessageItem from "./MessageItem/MessageItem";
@@ -24,6 +23,7 @@ export const Messages = () => {
     if (currentData) {
       let newData = [...currentData.data.userMessages];
       newData.sort(compareCreatedAt);
+
       setUserMessages(newData);
       setTotalCount(currentData.data.totalCount);
     }
@@ -43,14 +43,14 @@ export const Messages = () => {
       <LayoutToolbar>
         <RefreshBtn onClick={refetch} isFetching={isFetching} />
 
-        <TablePagination
+        <SC.StyledPagination
           component="div"
           count={totalCount}
           page={page}
           onPageChange={handleChangePage}
           rowsPerPage={rowsPerPage}
           onRowsPerPageChange={handleChangeRowsPerPage}
-          labelRowsPerPage="Кількість на сторінці:"
+          labelRowsPerPage={"Кількість на сторінці:"}
         />
       </LayoutToolbar>
       <SC.MessagesContainer>

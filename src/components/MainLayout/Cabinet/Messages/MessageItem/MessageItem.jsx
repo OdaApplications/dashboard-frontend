@@ -20,18 +20,23 @@ const MessageItem = ({ message }) => {
 
   return (
     <>
-      <SC.MessagesItem onClick={onMessageClick}>
+      <SC.MessagesItem
+        style={{
+          flexDirection: isMobileScreen ? "column" : "row",
+          gap: isMobileScreen ? "12px" : "20px",
+        }}
+        onClick={onMessageClick}
+      >
         <div>
           <SC.MessagesDescription
             style={{
-              // width: isSmallScreen ? "120px" : "220px",
               fontSize: isSmallScreen ? "12px" : "14px",
               paddingBottom: "4px",
             }}
           >
             {isMobileScreen
-              ? message.senderName.substring(0, 20)
-              : message.senderName.substring(0, 30)}
+              ? message.senderName.substring(0, 30)
+              : message.senderName.substring(0, 50)}
           </SC.MessagesDescription>
 
           <SC.MessagesTitle
@@ -40,14 +45,14 @@ const MessageItem = ({ message }) => {
             }}
           >
             {isMediumScreen
-              ? message.title.substring(0, 20) + "..."
-              : message.title.substring(0, 50) + "..."}
+              ? message.text.substring(0, 30) + "..."
+              : message.text.substring(0, 50) + "..."}
           </SC.MessagesTitle>
         </div>
 
         <SC.MessagesDescription
           style={{
-            marginLeft: "auto",
+            marginLeft: isMobileScreen ? 0 : "auto",
             fontSize: isSmallScreen ? "12px" : "14px",
           }}
         >
