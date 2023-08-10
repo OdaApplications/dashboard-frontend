@@ -19,7 +19,6 @@ export const ModalMessagesWindow = styled("div")((props) => ({
 
 export const MenuButton = styled(IconButton)(({ theme }) => ({
   position: "absolute",
-  // top: "20px",
   right: "14px",
   margin: 0,
 
@@ -82,5 +81,6 @@ export const SenderText = styled("p")(({ theme }) => ({
   fontFamily: "e-Ukraine",
   fontSize: "14px",
   fontWeight: "300",
-  overflowWrap: 'break-word'
+  textAlign: "justify",
+  overflowWrap: "break-word",
 }));

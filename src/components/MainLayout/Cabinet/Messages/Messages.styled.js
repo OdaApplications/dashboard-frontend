@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Box } from "@mui/material";
+import { Box, TablePagination } from "@mui/material";
 
 export const MessagesContainer = styled(Box)((props) => ({
   width: "100%",
@@ -29,4 +29,46 @@ export const MessagesList = styled("ul")((props) => ({
   flexDirection: "column",
   alignItems: "center",
   margin: "0",
+}));
+
+export const StyledPagination = styled(TablePagination)((props) => ({
+  color: "rgba(0, 0, 0, 0.50)",
+  fontFamily: "e-Ukraine",
+  fontStyle: "normal",
+  fontWeight: "500",
+  lineHeight: "normal",
+
+  "& .MuiInputBase-root": {
+    "@media (max-width: 600px)": {
+      display: "none",
+    },
+  },
+
+  "& .MuiTablePagination-selectLabel": {
+    fontFamily: "e-Ukraine",
+    fontStyle: "normal",
+    fontWeight: "500",
+    lineHeight: "normal",
+
+    "@media (max-width: 600px)": {
+      display: "none",
+    },
+  },
+
+  "& .MuiSelect-select": {
+    display: "flex",
+    alignItems: "center",
+    color: "#000",
+    fontFamily: "e-Ukraine",
+    fontStyle: "normal",
+    fontWeight: "500",
+    lineHeight: "normal",
+  },
+
+  "& .MuiTablePagination-displayedRows": {
+    fontFamily: "e-Ukraine",
+    fontStyle: "normal",
+    fontWeight: "500",
+    lineHeight: "normal",
+  },
 }));
