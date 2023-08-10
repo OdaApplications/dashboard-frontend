@@ -45,7 +45,7 @@ const MessageItem = ({ message }) => {
             }}
           >
             {isMediumScreen
-              ? message.text.substring(0, 30) + "..."
+              ? message.text.substring(0, 20) + "..."
               : message.text.substring(0, 50) + "..."}
           </SC.MessagesTitle>
         </div>
