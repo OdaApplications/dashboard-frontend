@@ -4,7 +4,7 @@ import * as SC from "./Messages.styled";
 import MessageItem from "./MessageItem/MessageItem";
 import { useGetUserMsgQuery } from "redux/API/cabinetApi";
 
-import { compareCreatedAt } from "components/helpers/workWithDate";
+// import { compareCreatedAt } from "components/helpers/workWithDate";
 import { RefreshBtn } from "../../RefreshBtn";
 import { LayoutToolbar } from "components/MainLayout/LayoutToolbar/LayoutToolbar";
 
@@ -22,7 +22,7 @@ export const Messages = () => {
   useEffect(() => {
     if (currentData) {
       let newData = [...currentData.data.userMessages];
-      newData.sort(compareCreatedAt);
+      // newData.sort(compareCreatedAt);
 
       setUserMessages(newData);
       setTotalCount(currentData.data.totalCount);
