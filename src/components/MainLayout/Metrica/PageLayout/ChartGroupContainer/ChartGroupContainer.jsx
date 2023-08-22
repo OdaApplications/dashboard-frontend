@@ -28,7 +28,6 @@ export const ChartGroupContainer = ({ person, chartGroup, isDragable }) => {
           <SC.BoxSubTitleContainerStyled>
             <FilterSelects
               filterSelects={chartGroup.filterSelects}
-              data={chartGroup.charts[0].chartConfig.data}
               setGroupFilter={setGroupFilter}
             />
           </SC.BoxSubTitleContainerStyled>

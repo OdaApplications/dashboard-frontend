@@ -46,7 +46,7 @@ export const LayoutGrid = ({ charts: newCharts, groupFilter, isDragable }) => {
         let data = { i: String(i), w, h, x, y };
         newArr.push(data);
       }
-      console.log(newArr);
+
       setLayout(newArr);
     }
   }, [charts]);

@@ -15,79 +15,61 @@ import * as SC from "./FilterSelects.styled";
 export const SelectClone = ({
   selectConfig,
   filterValue,
-  prevFilterQueryValues = {},
   user,
   setFilterValue,
   userFilterPosition,
 }) => {
   const [value, setValue] = useState("");
   const [currentValues, setCurrentValues] = useState(null);
-  const [queryFilterValues, setQueryFilterValues] = useState(null);
-  const { id, title, position, subSelect, table, target } = selectConfig;
+
+  const { id, title, subSelect, table, target } = selectConfig;
 
   const { currentData: selectValues } = useGetFilterValuesQuery(
     {
       target,
       table,
       filter:
-        queryFilterValues && Object.values(queryFilterValues)?.length > 0
-          ? encodeURIComponent(JSON.stringify(queryFilterValues))
+        filterValue && Object.values(filterValue)?.length > 0
+          ? encodeURIComponent(JSON.stringify(filterValue))
           : null,
     },
-    {}
+    { skip: filterValue[target] }
   );
 
   useEffect(() => {
     if (selectValues) {
+      setValue("");
       setCurrentValues(selectValues.data);
     }
   }, [selectValues]);
 
   useEffect(() => {
-    if (Object.keys(prevFilterQueryValues).length > 0) {
-      setQueryFilterValues(prevFilterQueryValues);
+    if (value !== "") {
+      setFilterValue((prevState) => {
+        return {
+          ...prevState,
+          [target]: value,
+        };
+      });
+    } else {
+      setFilterValue((prevState) => {
+        const newState = { ...prevState };
+        delete newState[target];
+        return newState;
+      });
     }
-  }, [prevFilterQueryValues]);
-
-  // useEffect(() => {
-  //   if (selectValues) {
-  //     const userFilter = user?.access;
-  //     if (userFilter && userFilter === selectConfig.target) {
-  //       setCurrentValues({ [user[userFilter]]: data[user[userFilter]] });
-  //     } else if (
-  //       userFilter &&
-  //       userFilter !== selectConfig.target &&
-  //       !(selectConfig.position > userFilterPosition)
-  //     ) {
-  //       setCurrentValues({
-  //         [user[selectConfig.target]]: data[user[selectConfig.target]],
-  //       });
-  //       setValue(user[selectConfig.target]);
-  //     } else {
-  //       setCurrentValues(data);
-  //     }
-  //   }
-  // }, []);
-
-  useEffect(() => {
-    setFilterValue((prevState) => {
-      return {
-        ...prevState,
-        [position]: value,
-      };
-    });
-  }, [setFilterValue, position, value]);
+  }, [value, target, setFilterValue]);
 
   const handleChange = (event) => {
     setValue(event.target.value);
-    setQueryFilterValues({
-      ...queryFilterValues,
-      [target]: event.target.value,
-    });
+    if (subSelect) {
+      setFilterValue((prevState) => {
+        const newState = { ...prevState };
+        delete newState[subSelect.target];
+        return newState;
+      });
+    }
   };
-
-  console.log("542", queryFilterValues);
-  console.log("```", currentValues);
 
   if (currentValues)
     return (
@@ -154,11 +136,9 @@ export const SelectClone = ({
             </Box>
           )}
         </SC.FilterSelectsItem>
-
         {subSelect && value.length > 0 && (
           <Select
             selectConfig={subSelect}
-            prevFilterQueryValues={queryFilterValues}
             filterValue={filterValue}
             setFilterValue={setFilterValue}
             user={user}
@@ -168,3 +148,23 @@ export const SelectClone = ({
       </>
     );
 };
+
+// useEffect(() => {
+//   if (selectValues) {
+//     const userFilter = user?.access;
+//     if (userFilter && userFilter === selectConfig.target) {
+//       setCurrentValues({ [user[userFilter]]: data[user[userFilter]] });
+//     } else if (
+//       userFilter &&
+//       userFilter !== selectConfig.target &&
+//       !(selectConfig.position > userFilterPosition)
+//     ) {
+//       setCurrentValues({
+//         [user[selectConfig.target]]: data[user[selectConfig.target]],
+//       });
+//       setValue(user[selectConfig.target]);
+//     } else {
+//       setCurrentValues(data);
+//     }
+//   }
+// }, []);

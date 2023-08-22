@@ -2,25 +2,15 @@ import React, { useState, useEffect } from "react";
 import ChartsGenetrators from "./ChartsGenetrators";
 import * as SC from "./ChartConstructor.styled";
 import { AditionalSetings } from "./AditionalSetings/AditionalSetings";
-import { useGetChartDataQuery } from "redux/API/chartApi";
 
 export const ChartConstructor = ({ chart, groupFilter }) => {
-  const [filter, setFilter] = useState([]);
-  const [chartData, setChartData] = useState({});
+  const [filter, setFilter] = useState({});
 
   useEffect(() => {
     if (groupFilter) {
       setFilter(groupFilter);
     }
   }, [groupFilter]);
-
-  const { currentData } = useGetChartDataQuery(chart?.id, { skip: !chart });
-
-  useEffect(() => {
-    if (currentData) {
-      setChartData(currentData?.data.data);
-    }
-  }, [currentData]);
 
   if (!chart) {
     return null;
@@ -35,19 +25,19 @@ export const ChartConstructor = ({ chart, groupFilter }) => {
             <SC.TypographyStyled>{chart.title}</SC.TypographyStyled>
           )}
         </SC.BoxTitle>
-        {chart.filterSelects && currentData && (
+        {chart.filterSelects && (
           <AditionalSetings
             setFilter={setFilter}
             aditionalSetings={{ filterSelects: chart.filterSelects }}
           />
         )}
-        {Object.keys(chartData).length > 0 && (
-          <TypeChart
-            options={chart.options}
-            series={chartData}
-            type={chart.type}
-          />
-        )}
+
+        <TypeChart
+          id={chart.id}
+          options={chart.options}
+          filter={filter}
+          type={chart.type}
+        />
       </SC.BoxChartContainer>
     </SC.CahrtConstructorWrapper>
   );

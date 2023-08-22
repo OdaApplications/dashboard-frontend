@@ -3,8 +3,10 @@ import { api } from "./API";
 export const chartApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getChartData: builder.query({
-      query: (chartID) => ({
-        url: `/charts/get-chart-data/${chartID}`,
+      query: ({ chartID, filter }) => ({
+        url: `/charts/get-chart-data/${chartID}${
+          filter ? "?filter=" + filter : ""
+        }`,
       }),
     }),
     getFilterValues: builder.query({

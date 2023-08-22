@@ -11,6 +11,10 @@ export const FilterSelects = ({ filterSelects, setFilter, setGroupFilter }) => {
   const person = useSelector(selectPerson);
   const user = useSelector(selectUser);
 
+  try {
+    filterSelects = JSON.parse(filterSelects);
+  } catch (error) {}
+
   useEffect(() => {
     if (person === "public") return;
 
@@ -30,9 +34,9 @@ export const FilterSelects = ({ filterSelects, setFilter, setGroupFilter }) => {
   useEffect(() => {
     if (Object.keys(filterValue).length > 0) {
       if (setGroupFilter) {
-        setGroupFilter(Object.values(filterValue));
+        setGroupFilter(filterValue);
       } else {
-        setFilter(Object.values(filterValue));
+        setFilter(filterValue);
       }
     }
   }, [filterValue, setFilter, setGroupFilter]);
