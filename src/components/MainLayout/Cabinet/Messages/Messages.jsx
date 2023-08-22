@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 
 import * as SC from "./Messages.styled";
 import MessageItem from "./MessageItem/MessageItem";
-// import { getDepMessages } from "API/depCabinet/depMessages";
 import { useGetUserMsgQuery } from "redux/API/cabinetApi";
 
-import { compareCreatedAt } from "components/helpers/workWithDate";
+import { compareCreatedAt } from "components/helpers";
 import { RefreshBtn } from "../../RefreshBtn";
 import { LayoutToolbar } from "components/MainLayout/LayoutToolbar/LayoutToolbar";
 

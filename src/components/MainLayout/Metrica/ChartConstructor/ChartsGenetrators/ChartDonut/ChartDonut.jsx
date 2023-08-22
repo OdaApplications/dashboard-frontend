@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import * as SC from "./ChartDonut.styled";
+import { labelDonutFormaterFunc } from "components/helpers";
 
 import { useGetChartDataQuery } from "redux/API/chartApi";
 
@@ -31,27 +32,13 @@ export const ChartDonut = ({ id, options, filter, type }) => {
     <SC.BoxDonutStyled>
       <SC.DonutBarStyled
         options={{
-          chart: {
-            id: "donut-chart",
-          },
-
-          dataLabels: {
-            enabled: true,
-          },
-          plotOptions: {
-            pie: {
-              donut: {
-                size: "50%",
-              },
-            },
-          },
-          legend: {
-            labels: {
-              colors: "#000т",
-            },
-            position: "top",
-          },
-          labels: ["ЦНАП", "ТП", "ВРМ", "Дія Центр"],
+          ...options,
+          dataLabels: options.dataLabels.formatter
+            ? {
+                ...options.dataLabels,
+                formatter: labelDonutFormaterFunc(),
+              }
+            : options.dataLabels,
         }}
         series={series.data}
         type={type}
