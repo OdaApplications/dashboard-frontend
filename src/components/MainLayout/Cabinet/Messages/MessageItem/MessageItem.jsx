@@ -5,7 +5,7 @@ import ModalMessages from "../ModalMessages/ModalMessages";
 import { useMediaQuery } from "@mui/material";
 import * as SC from "./MessageItem.styled";
 
-import { dateTransformer } from "components/helpers/workWithDate";
+import { dateTransformer } from "components/helpers";
 
 const MessageItem = ({ message }) => {
   const [showMessagesDetails, setShowMessagesDetails] = useState(false);
@@ -24,7 +24,6 @@ const MessageItem = ({ message }) => {
         <div>
           <SC.MessagesDescription
             style={{
-              // width: isSmallScreen ? "120px" : "220px",
               fontSize: isSmallScreen ? "12px" : "14px",
               paddingBottom: "4px",
             }}

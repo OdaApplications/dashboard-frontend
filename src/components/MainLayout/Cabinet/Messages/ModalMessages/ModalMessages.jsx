@@ -1,4 +1,4 @@
-import { dateTransformer } from "components/helpers/workWithDate";
+import { dateTransformer } from "components/helpers";
 import { Box, useMediaQuery } from "@mui/material";
 import * as SC from "./ModalMessages.styled";
 
