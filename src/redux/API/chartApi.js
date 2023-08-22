@@ -7,7 +7,14 @@ export const chartApi = api.injectEndpoints({
         url: `/charts/get-chart-data/${chartID}`,
       }),
     }),
+    getFilterValues: builder.query({
+      query: ({ table, target, filter }) => ({
+        url: `/charts/get-filter-value/${table}/${target}${
+          filter ? "?filter=" + filter : ""
+        }`,
+      }),
+    }),
   }),
 });
 
-export const { useGetPageConfigQuery } = chartApi;
+export const { useGetChartDataQuery, useGetFilterValuesQuery } = chartApi;

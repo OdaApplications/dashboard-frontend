@@ -1,52 +1,73 @@
 import React, { useState, useEffect } from "react";
-import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import { Select as MuiSelect } from "@mui/material";
+
+import {
+  Box,
+  InputLabel,
+  MenuItem,
+  FormControl,
+  Select as MuiSelect,
+} from "@mui/material";
 import { SelectClone } from "./SelectClone";
+import { useGetFilterValuesQuery } from "redux/API/chartApi";
+
 import * as SC from "./FilterSelects.styled";
 
 export const Select = ({
   selectConfig,
-  data,
   filterValue,
+  prevFilterQueryValues = {},
   user,
   setFilterValue,
   userFilterPosition,
 }) => {
   const [value, setValue] = useState("");
-  const [currentData, setCurrentData] = useState(data);
-  const { id, title, position, subSelect } = selectConfig;
+  const [currentValues, setCurrentValues] = useState(null);
+  const [queryFilterValues, setQueryFilterValues] = useState(null);
+  const { id, title, position, subSelect, table, target } = selectConfig;
+
+  const { currentData: selectValues } = useGetFilterValuesQuery(
+    {
+      target,
+      table,
+      filter:
+        queryFilterValues && Object.values(queryFilterValues)?.length > 0
+          ? encodeURIComponent(JSON.stringify(queryFilterValues))
+          : null,
+    },
+    { skip: currentValues }
+  );
 
   useEffect(() => {
-    if (data) {
-      const userFilter = user?.access;
-      if (userFilter && userFilter === selectConfig.target) {
-        setCurrentData({ [user[userFilter]]: data[user[userFilter]] });
-      } else if (
-        userFilter &&
-        userFilter !== selectConfig.target &&
-        !(selectConfig.position > userFilterPosition)
-      ) {
-        setCurrentData({
-          [user[selectConfig.target]]: data[user[selectConfig.target]],
-        });
-        setValue(user[selectConfig.target]);
-      } else {
-        setCurrentData(data);
-      }
+    if (selectValues) {
+      setCurrentValues(selectValues.data);
     }
-  }, [
-    data,
-    selectConfig.position,
-    selectConfig.target,
-    user,
-    userFilterPosition,
-  ]);
+  }, [selectValues]);
+
   useEffect(() => {
-    if (currentData) setValue(Object.keys(currentData)[0]);
-  }, [currentData]);
+    if (Object.keys(prevFilterQueryValues).length > 0) {
+      setQueryFilterValues(prevFilterQueryValues);
+    }
+  }, [prevFilterQueryValues]);
+
+  // useEffect(() => {
+  //   if (selectValues) {
+  //     const userFilter = user?.access;
+  //     if (userFilter && userFilter === selectConfig.target) {
+  //       setCurrentValues({ [user[userFilter]]: data[user[userFilter]] });
+  //     } else if (
+  //       userFilter &&
+  //       userFilter !== selectConfig.target &&
+  //       !(selectConfig.position > userFilterPosition)
+  //     ) {
+  //       setCurrentValues({
+  //         [user[selectConfig.target]]: data[user[selectConfig.target]],
+  //       });
+  //       setValue(user[selectConfig.target]);
+  //     } else {
+  //       setCurrentValues(data);
+  //     }
+  //   }
+  // }, []);
 
   useEffect(() => {
     setFilterValue((prevState) => {
@@ -59,77 +80,83 @@ export const Select = ({
 
   const handleChange = (event) => {
     setValue(event.target.value);
+    setQueryFilterValues({
+      ...queryFilterValues,
+      [target]: event.target.value,
+    });
   };
 
-  if (currentData)
+  console.log("queryFilterValues", queryFilterValues);
+
+  if (currentValues)
     return (
       <>
         <SC.FilterSelectsItem>
-          {Array.isArray(Object.keys(currentData)) &&
-            Object.keys(currentData).length > 1 && (
-              <Box>
-                <FormControl
-                  size="small"
+          {Array.isArray(currentValues) && currentValues.length > 1 && (
+            <Box>
+              <FormControl
+                size="small"
+                sx={{
+                  width: 120,
+                  color: "#000",
+                  borderColor: "#000",
+                  "&:hover": {
+                    "&& fieldset": {
+                      color: "inherit",
+                      borderColor: "rgba(255, 255, 255, 1)",
+                    },
+                  },
+                  "& label.Mui-focused": {
+                    color: "#000",
+                  },
+                  "& svg": {
+                    color: "inherit",
+                  },
+                  "& fieldset": {
+                    borderColor: "rgba(255, 255, 255, 0.5)",
+                  },
+                }}
+              >
+                <InputLabel
                   sx={{
-                    width: 120,
+                    color: "inherit",
+                    borderColor: "#000",
+                  }}
+                  id={`${id}-label`}
+                >
+                  {title}
+                </InputLabel>
+                <MuiSelect
+                  labelId={`${id}-label`}
+                  id={id}
+                  value={value}
+                  label={title}
+                  sx={{
                     color: "#000",
                     borderColor: "#000",
-                    "&:hover": {
-                      "&& fieldset": {
-                        color: "inherit",
-                        borderColor: "rgba(255, 255, 255, 1)",
-                      },
-                    },
-                    "& label.Mui-focused": {
-                      color: "#000",
-                    },
-                    "& svg": {
-                      color: "inherit",
-                    },
-                    "& fieldset": {
-                      borderColor: "rgba(255, 255, 255, 0.5)",
+                    "&& .MuiOutlinedInput-notchedOutline": {
+                      borderWidth: "2px !important",
+                      borderColor: "inherit !important",
                     },
                   }}
+                  onChange={handleChange}
                 >
-                  <InputLabel
-                    sx={{
-                      color: "inherit",
-                      borderColor: "#000",
-                    }}
-                    id={`${id}-label`}
-                  >
-                    {title}
-                  </InputLabel>
-                  <MuiSelect
-                    labelId={`${id}-label`}
-                    id={id}
-                    value={value}
-                    label={title}
-                    sx={{
-                      color: "#000",
-                      borderColor: "#000",
-                      "&& .MuiOutlinedInput-notchedOutline": {
-                        borderWidth: "2px !important",
-                        borderColor: "inherit !important",
-                      },
-                    }}
-                    onChange={handleChange}
-                  >
-                    {Array.isArray(Object.keys(currentData)) &&
-                      Object.keys(currentData).map((value, index) => (
-                        <MenuItem key={index} value={value}>
-                          {value}
-                        </MenuItem>
-                      ))}
-                  </MuiSelect>
-                </FormControl>
-              </Box>
-            )}
+                  <MenuItem value="">{"Все"}</MenuItem>
+                  {Array.isArray(currentValues) &&
+                    currentValues.map((value, index) => (
+                      <MenuItem key={index} value={value}>
+                        {value}
+                      </MenuItem>
+                    ))}
+                </MuiSelect>
+              </FormControl>
+            </Box>
+          )}
         </SC.FilterSelectsItem>
-        {subSelect && (
+        {subSelect && value.length > 0 && (
           <SelectClone
             selectConfig={subSelect}
-            data={currentData[value]}
+            prevFilterQueryValues={queryFilterValues}
             filterValue={filterValue}
             setFilterValue={setFilterValue}
             user={user}

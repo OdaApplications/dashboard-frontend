@@ -5,15 +5,9 @@ import { useSelector } from "react-redux";
 import { selectUser } from "redux/auth/authSlice";
 import { selectPerson } from "redux/person/personSlice";
 
-export const FilterSelects = ({
-  filterSelects,
-  data,
-  setFilter,
-  setGroupFilter,
-}) => {
+export const FilterSelects = ({ filterSelects, setFilter, setGroupFilter }) => {
   const [filterValue, setFilterValue] = useState({});
   const [userFilterPosition, setUserFilterPosition] = useState(0);
-
   const person = useSelector(selectPerson);
   const user = useSelector(selectUser);
 
@@ -53,7 +47,6 @@ export const FilterSelects = ({
           setFilterValue={setFilterValue}
           userFilterPosition={userFilterPosition}
           setUserFilterPosition={setUserFilterPosition}
-          data={data}
           user={person === "cabinet" && user}
         />
       ))}

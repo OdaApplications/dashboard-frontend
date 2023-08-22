@@ -7,7 +7,7 @@ import * as SC from "./PageLayoute.styled";
 import { useParams, useNavigate, useOutletContext } from "react-router-dom";
 import { MessageBox } from "components/MainLayout/MessageBox";
 import { ChartGroupContainer } from "./ChartGroupContainer/ChartGroupContainer";
-// import { useGetPageConfigQuery } from "redux/API/pageChartsApi";
+import { useGetPageConfigQuery } from "redux/API/pageChartsApi";
 import { LayoutToolbar } from "components/MainLayout/LayoutToolbar/LayoutToolbar";
 import { DNDSwitch } from "components/MainLayout/Metrica/PageLayout/DNDSwitch";
 import { RefreshBtn } from "components/MainLayout/RefreshBtn";
@@ -28,11 +28,11 @@ const PageLayoute = () => {
   const person = useSelector(selectPerson);
   const isSmallScreen = useMediaQuery("(max-width: 899px)");
 
-  // const paramsValues = Object.values(params);
+  const paramsValues = Object.values(params);
 
-  // const { currentData, refetch, isFetching } = useGetPageConfigQuery(
-  //   paramsValues[paramsValues.length - 1]
-  // );
+  const { currentData, refetch, isFetching } = useGetPageConfigQuery(
+    paramsValues[paramsValues.length - 1]
+  );
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -81,15 +81,14 @@ const PageLayoute = () => {
       return;
     }
     setCurrentPageConfig(pageConfig);
-    setChartsGroups(pageConfig?.chartsGroups || []);
+    // setChartsGroups(pageConfig?.chartsGroups || []);
   }, [navigate, params]);
 
-  // useEffect(() => {
-  //   if (currentData) {
-  //     setChartsGroups(currentData?.data?.chartsGroups || []);
-  //   }
-  // }, [currentData]);
-  // console.log(chartsGroups);
+  useEffect(() => {
+    if (currentData) {
+      setChartsGroups(currentData?.data?.chartsGroups || []);
+    }
+  }, [currentData]);
 
   return (
     <SC.PageLayoutContainerStyled>

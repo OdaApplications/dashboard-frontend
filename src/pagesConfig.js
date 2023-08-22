@@ -3588,12 +3588,14 @@ export const metricaPagesCabinet = [
                             id: nanoid(),
                             position: "1",
                             title: "Райони",
+                            table: "cas",
                             target: "district",
 
                             subSelect: {
                               id: nanoid(),
                               position: "2",
                               title: "Громади",
+                              table: "cas",
                               target: "hromada",
                             },
                           },
@@ -3721,12 +3723,14 @@ export const metricaPagesCabinet = [
                             id: nanoid(),
                             position: "1",
                             title: "Райони",
+                            table: "cas",
                             target: "district",
 
                             subSelect: {
                               id: nanoid(),
                               position: "2",
                               title: "Громади",
+                              table: "cas",
                               target: "hromada",
                             },
                           },

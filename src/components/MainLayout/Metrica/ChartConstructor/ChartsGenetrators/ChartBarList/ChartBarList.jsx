@@ -3,38 +3,16 @@ import { Box } from "@mui/material";
 
 import * as SC from "./ChartBarList.styled";
 
-export const ChartBarList = ({ chartConfig, filter }) => {
-  const [currentSeries, setCurrentSeries] = useState([]);
+export const ChartBarList = ({ options, type, series }) => {
   const [barHeight, setBarHeight] = useState(0);
 
   useEffect(() => {
-    if (chartConfig?.series) {
-      setCurrentSeries(chartConfig.series);
+    if (series.data.length > 0) {
+      setBarHeight(24 * series[0].data.length);
     }
-    if (chartConfig?.data) {
-      let newSeries = chartConfig.data;
+  }, [series]);
 
-      for (const elem of filter) {
-        if (newSeries) {
-          if (elem === "") {
-            newSeries = newSeries[Object.keys(newSeries)[0]];
-          } else {
-            newSeries = newSeries[elem];
-          }
-        }
-      }
-
-      setCurrentSeries(newSeries);
-    }
-  }, [chartConfig, filter]);
-
-  useEffect(() => {
-    if (currentSeries[0]?.data?.length > 0) {
-      setBarHeight(24 * currentSeries[0].data.length);
-    }
-  }, [currentSeries]);
-
-  if (!chartConfig.options) {
+  if (!series) {
     return <div>no data</div>;
   }
   return (
@@ -46,10 +24,16 @@ export const ChartBarList = ({ chartConfig, filter }) => {
           borderRadius: "12px",
         }}
       >
-        {Array.isArray(currentSeries) && (
+        {Array.isArray(series) && (
           <SC.ChartBarListStyled
-            options={{ ...chartConfig.options, colors: ["#55A5B7"] }}
-            series={currentSeries}
+            options={{
+              ...options,
+              xaxis: {
+                categories: series.labels,
+              },
+              colors: ["#55A5B7"],
+            }}
+            series={series.data}
             type={"bar"}
             height={`${barHeight}px`}
           />
