@@ -5,7 +5,7 @@ import ModalMessages from "../ModalMessages/ModalMessages";
 import { useMediaQuery } from "@mui/material";
 import * as SC from "./MessageItem.styled";
 
-import { dateTransformer } from "components/helpers/workWithDate";
+import { dateTransformer } from "components/helpers";
 
 const MessageItem = ({ message }) => {
   const [showMessagesDetails, setShowMessagesDetails] = useState(false);

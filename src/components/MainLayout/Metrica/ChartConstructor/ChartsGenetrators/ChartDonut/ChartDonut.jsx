@@ -1,43 +1,92 @@
 import React, { useState, useEffect } from "react";
 import * as SC from "./ChartDonut.styled";
+import { labelDonutFormaterFunc } from "components/helpers";
+import { Box } from "@mui/material";
 
-export const ChartDonut = ({ chartConfig, filter }) => {
-  const [currentSeries, setCurrentSeries] = useState([]);
+import { useGetChartDataQuery } from "redux/API/chartApi";
+import { LoaderSmall } from "components/MainLayout/Loader";
+
+export const ChartDonut = ({
+  id,
+  options,
+  filter,
+  type,
+  filterSelects,
+  groupFilter,
+}) => {
+  const [series, setSeries] = useState({});
+
+  const { currentData, isFetching } = useGetChartDataQuery(
+    {
+      chartID: id,
+      filter:
+        Object.keys(filter).length > 0 && (filterSelects || groupFilter)
+          ? encodeURIComponent(JSON.stringify(filter))
+          : null,
+    },
+    { skip: !id }
+  );
 
   useEffect(() => {
-    if (chartConfig?.series) {
-      setCurrentSeries(chartConfig.series);
+    if (currentData) {
+      setSeries(currentData?.data.data);
     }
-    if (chartConfig?.data) {
-      let newSeries = chartConfig.data;
+  }, [currentData]);
 
-      for (const elem of filter) {
-        if (newSeries) {
-          if (elem === "") {
-            newSeries = newSeries[Object.keys(newSeries)[0]];
-          } else {
-            newSeries = newSeries[elem];
-          }
-        }
-      }
-
-      setCurrentSeries(newSeries);
-    }
-  }, [chartConfig, filter]);
-
-  if (!chartConfig.options) {
+  if (series.length === 0) {
     return <div>no data</div>;
   }
-  return (
-    <SC.BoxDonutStyled>
-      {Array.isArray(currentSeries) && (
+
+  if (isFetching) {
+    return (
+      <SC.BoxDonutStyled>
+        <Box
+          sx={{
+            height: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <LoaderSmall />
+        </Box>
+      </SC.BoxDonutStyled>
+    );
+  }
+
+  if (Object.keys(series).length > 0) {
+    return (
+      <SC.BoxDonutStyled>
         <SC.DonutBarStyled
-          options={chartConfig.options}
-          series={currentSeries}
-          type={chartConfig.type}
+          options={{
+            ...options,
+            dataLabels: options.dataLabels.formatter
+              ? {
+                  ...options.dataLabels,
+                  formatter: labelDonutFormaterFunc(),
+                }
+              : options.dataLabels,
+          }}
+          series={series.data}
+          type={type}
           height={"100%"}
         />
-      )}
-    </SC.BoxDonutStyled>
-  );
+      </SC.BoxDonutStyled>
+    );
+  } else {
+    return (
+      <SC.BoxDonutStyled>
+        <Box
+          sx={{
+            height: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <SC.NoDataMessage>{`Данні опрацьовуються.`}</SC.NoDataMessage>
+        </Box>
+      </SC.BoxDonutStyled>
+    );
+  }
 };

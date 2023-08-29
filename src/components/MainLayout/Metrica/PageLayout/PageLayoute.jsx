@@ -7,13 +7,16 @@ import * as SC from "./PageLayoute.styled";
 import { useParams, useNavigate, useOutletContext } from "react-router-dom";
 import { MessageBox } from "components/MainLayout/MessageBox";
 import { ChartGroupContainer } from "./ChartGroupContainer/ChartGroupContainer";
-// import { useGetPageConfigQuery } from "redux/API/pageChartsApi";
+import { useGetPageConfigQuery } from "redux/API/pageChartsApi";
 import { LayoutToolbar } from "components/MainLayout/LayoutToolbar/LayoutToolbar";
 import { DNDSwitch } from "components/MainLayout/Metrica/PageLayout/DNDSwitch";
 import { RefreshBtn } from "components/MainLayout/RefreshBtn";
 import { useSelector } from "react-redux";
 import { selectPerson } from "redux/person/personSlice";
 import { GroupNavBar } from "./GroupNavBar/GroupNavBar";
+import { LoaderBig } from "components/MainLayout/Loader";
+import { transform } from "framer-motion";
+import { flex, position } from "styled-system";
 
 const PageLayoute = () => {
   const [setSubMenu] = useOutletContext();
@@ -28,11 +31,11 @@ const PageLayoute = () => {
   const person = useSelector(selectPerson);
   const isSmallScreen = useMediaQuery("(max-width: 899px)");
 
-  // const paramsValues = Object.values(params);
+  const paramsValues = Object.values(params);
 
-  // const { currentData, refetch, isFetching } = useGetPageConfigQuery(
-  //   paramsValues[paramsValues.length - 1]
-  // );
+  const { currentData, refetch, isFetching, error } = useGetPageConfigQuery(
+    paramsValues.join("_")
+  );
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -57,7 +60,7 @@ const PageLayoute = () => {
       if (index === 0) {
         return acc.find((item) => item.id === elem[1]);
       }
-      let newAcc = acc.children.find((item) => item.id === elem[1]);
+      let newAcc = acc?.children.find((item) => item.id === elem[1]);
       if (elem[0] === "sub" && newAcc?.children) {
         setSubNav(newAcc.children);
         if (params.group) {
@@ -81,22 +84,20 @@ const PageLayoute = () => {
       return;
     }
     setCurrentPageConfig(pageConfig);
-    setChartsGroups(pageConfig?.chartsGroups || []);
   }, [navigate, params]);
 
-  // useEffect(() => {
-  //   if (currentData) {
-  //     setChartsGroups(currentData?.data?.chartsGroups || []);
-  //   }
-  // }, [currentData]);
-  // console.log(chartsGroups);
+  useEffect(() => {
+    if (currentData) {
+      setChartsGroups(currentData?.data?.chartsGroups || []);
+    }
+  }, [currentData, error, navigate]);
 
   return (
     <SC.PageLayoutContainerStyled>
       {currentPageConfig && (
         <>
           <LayoutToolbar>
-            <RefreshBtn />
+            <RefreshBtn onClick={refetch} isFetching={isFetching} />
             <Box sx={{ flexGrow: 1 }} />
             {subNav.length > 0 && (
               <GroupNavBar
@@ -115,19 +116,26 @@ const PageLayoute = () => {
               />
             )}
           </LayoutToolbar>
-          {chartsGroups.length === 0 ? (
-            <Box sx={{ mt: "20vh" }}>
-              <MessageBox text={"Інформація опрацьовується"} />
-            </Box>
+          {!isFetching ? (
+            chartsGroups.length === 0 ? (
+              <Box sx={{ mt: "20vh" }}>
+                <MessageBox text={"Інформація опрацьовується"} />
+              </Box>
+            ) : (
+              chartsGroups.map((item, index) => (
+                <ChartGroupContainer
+                  person={person}
+                  isDragable={isDragable}
+                  key={index}
+                  chartGroup={item}
+                  valueTriger={value}
+                />
+              ))
+            )
           ) : (
-            chartsGroups.map((item, index) => (
-              <ChartGroupContainer
-                person={person}
-                isDragable={isDragable}
-                key={index}
-                chartGroup={item}
-              />
-            ))
+            <Box sx={{ position: "relative", flexGrow: 1 }}>
+              <LoaderBig notFullScrean />
+            </Box>
           )}
           <Box
             sx={{

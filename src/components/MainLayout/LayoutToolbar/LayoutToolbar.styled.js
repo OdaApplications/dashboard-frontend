@@ -16,6 +16,5 @@ export const LayoutToolBarContainerStyled = styled(Box)((props) => ({
 
   mr: { lg: "32px" },
   ml: { lg: "32px" },
-  marginBottom: "16px",
   left: "0",
 }));

@@ -1,46 +1,72 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Box } from "@mui/material";
 
 import * as SC from "./SingleInfo.styled";
+import { useGetChartDataQuery } from "redux/API/chartApi";
+import { LoaderSmall } from "components/MainLayout/Loader";
 
-export const SingleInfo = ({ chartConfig, filter }) => {
-  const [currentSeries, setCurrentSeries] = useState([]);
+export const SingleInfo = ({
+  id,
+  options,
+  filter,
+  type,
+  filterSelects,
+  groupFilter,
+}) => {
+  const [series, setSeries] = useState({});
+
+  const { currentData, isFetching } = useGetChartDataQuery(
+    {
+      chartID: id,
+      filter:
+        Object.keys(filter).length > 0 && (filterSelects || groupFilter)
+          ? encodeURIComponent(JSON.stringify(filter))
+          : null,
+    },
+    { skip: !id }
+  );
 
   useEffect(() => {
-    if (chartConfig?.series) {
-      setCurrentSeries(chartConfig.series);
+    if (currentData) {
+      setSeries(currentData?.data.data);
     }
-    if (chartConfig?.data) {
-      let newSeries = chartConfig.data;
+  }, [currentData]);
 
-      for (const elem of filter) {
-        if (newSeries) {
-          if (elem === "") {
-            newSeries = newSeries[Object.keys(newSeries)[0]];
-          } else {
-            newSeries = newSeries[elem];
-          }
-        }
-      }
-
-      setCurrentSeries(newSeries);
-    }
-  }, [chartConfig, filter]);
-
-  if (!chartConfig.options) {
+  if (!options) {
     return <div>no data</div>;
   }
-  return (
-    <SC.BoxSingleInfoStyled>
-      <SC.TypographyTitleStyled>
-        {chartConfig.options.text}
-      </SC.TypographyTitleStyled>
-      {typeof currentSeries === "string" ||
-        (typeof currentSeries === "number" && (
-          <SC.TypographySubTitleStyled>
-            {currentSeries}
-            {chartConfig.options.addText && ` ${chartConfig.options.addText}`}
-          </SC.TypographySubTitleStyled>
-        ))}
-    </SC.BoxSingleInfoStyled>
-  );
+
+  if (isFetching) {
+    return (
+      <SC.BoxSingleInfoStyled>
+        <Box
+          sx={{
+            height: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <LoaderSmall />
+        </Box>
+      </SC.BoxSingleInfoStyled>
+    );
+  }
+
+  if (Object.keys(series)?.length > 0) {
+    return (
+      <SC.BoxSingleInfoStyled>
+        <SC.TypographyTitleStyled>{options.text}</SC.TypographyTitleStyled>
+        {typeof series?.data[0] === "string" ||
+          (typeof series?.data[0] === "number" && series?.data?.length > 0 ? (
+            <SC.TypographySubTitleStyled>
+              {series?.data[0]}
+              {options?.addText && ` ${options?.addText}`}
+            </SC.TypographySubTitleStyled>
+          ) : (
+            <SC.NoDataMessage>{`Данні опрацьовуються.`}</SC.NoDataMessage>
+          ))}
+      </SC.BoxSingleInfoStyled>
+    );
+  }
 };

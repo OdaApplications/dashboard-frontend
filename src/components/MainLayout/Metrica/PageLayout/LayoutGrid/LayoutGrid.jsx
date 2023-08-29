@@ -40,12 +40,13 @@ export const LayoutGrid = ({ charts: newCharts, groupFilter, isDragable }) => {
         const {
           id: i,
           size,
-          location: { y, x },
+          location: { x, y },
         } = chart;
         const { w, h } = containerSizes[size];
-        let data = { i, w, h, x, y };
+        let data = { i: String(i), w, h, x, y };
         newArr.push(data);
       }
+
       setLayout(newArr);
     }
   }, [charts]);

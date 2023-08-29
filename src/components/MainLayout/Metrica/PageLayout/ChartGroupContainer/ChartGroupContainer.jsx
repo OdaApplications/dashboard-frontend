@@ -5,18 +5,28 @@ import * as SC from "./ChartGroupContainer.styled";
 import { MessageBox } from "components/MainLayout/MessageBox";
 import { Box } from "@mui/material";
 
-export const ChartGroupContainer = ({ person, chartGroup, isDragable }) => {
-  const [groupFilter, setGroupFilter] = useState([]);
+export const ChartGroupContainer = ({
+  person,
+  chartGroup,
+  isDragable,
+  valueTriger,
+}) => {
+  const [groupFilter, setGroupFilter] = useState({});
   const [charts, setCharts] = useState([]);
 
   useEffect(() => {
+    setGroupFilter({});
+  }, [valueTriger]);
+
+  useEffect(() => {
+    const chartsParsed = JSON.parse(chartGroup.charts);
     if (person === "cabinet") {
-      setCharts(chartGroup.charts);
+      setCharts(chartsParsed);
     } else {
-      const puplicCharts = chartGroup.charts.filter((chart) => chart.public);
+      const puplicCharts = chartsParsed.filter((chart) => chart.public);
       setCharts(puplicCharts);
     }
-  }, [person, chartGroup.charts]);
+  }, [chartGroup.charts, person]);
 
   if (charts && charts.length > 0) {
     return (
@@ -28,7 +38,6 @@ export const ChartGroupContainer = ({ person, chartGroup, isDragable }) => {
           <SC.BoxSubTitleContainerStyled>
             <FilterSelects
               filterSelects={chartGroup.filterSelects}
-              data={chartGroup.charts[0].chartConfig.data}
               setGroupFilter={setGroupFilter}
             />
           </SC.BoxSubTitleContainerStyled>

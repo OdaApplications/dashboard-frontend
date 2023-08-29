@@ -4,7 +4,8 @@ import * as SC from "./ChartConstructor.styled";
 import { AditionalSetings } from "./AditionalSetings/AditionalSetings";
 
 export const ChartConstructor = ({ chart, groupFilter }) => {
-  const [filter, setFilter] = useState([]);
+  const [filter, setFilter] = useState({});
+
   useEffect(() => {
     if (groupFilter) {
       setFilter(groupFilter);
@@ -15,11 +16,7 @@ export const ChartConstructor = ({ chart, groupFilter }) => {
     return null;
   }
 
-  const TypeChart = ChartsGenetrators[chart?.chartConfig.type];
-  const { aditionalSetings = null } = chart?.chartConfig;
-
-
-
+  const TypeChart = ChartsGenetrators[chart?.type];
   return (
     <SC.CahrtConstructorWrapper>
       <SC.BoxChartContainer>
@@ -28,14 +25,21 @@ export const ChartConstructor = ({ chart, groupFilter }) => {
             <SC.TypographyStyled>{chart.title}</SC.TypographyStyled>
           )}
         </SC.BoxTitle>
-        {aditionalSetings && chart.chartConfig.data && (
+        {chart.filterSelects && (
           <AditionalSetings
             setFilter={setFilter}
-            data={chart.chartConfig.data}
-            aditionalSetings={aditionalSetings}
+            aditionalSetings={{ filterSelects: chart.filterSelects }}
           />
         )}
-        <TypeChart filter={filter} chartConfig={chart.chartConfig} />
+
+        <TypeChart
+          id={chart.id}
+          options={chart.options}
+          filter={filter}
+          type={chart.type}
+          filterSelects={chart.filterSelects}
+          groupFilter={groupFilter}
+        />
       </SC.BoxChartContainer>
     </SC.CahrtConstructorWrapper>
   );

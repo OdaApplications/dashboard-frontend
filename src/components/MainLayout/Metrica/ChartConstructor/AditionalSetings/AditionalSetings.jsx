@@ -4,6 +4,7 @@ import { FilterSelects } from "./FilterSelects/FilterSelects";
 
 export const AditionalSetings = ({ aditionalSetings, data, setFilter }) => {
   const { singleInfo, filterSelects } = aditionalSetings;
+
   if (singleInfo || filterSelects?.length > 0) {
     return (
       <SC.AditionalSetingsWrapper>

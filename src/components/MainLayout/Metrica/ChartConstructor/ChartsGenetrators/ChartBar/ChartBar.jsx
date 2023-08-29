@@ -1,43 +1,89 @@
-import React, { useEffect, useState } from "react";
-import * as SC from "./ChartBar.styled";
+import React, { useState, useEffect } from "react";
 
-export const ChartBar = ({ chartConfig, filter }) => {
-  const [currentSeries, setCurrentSeries] = useState([]);
+import * as SC from "./ChartBar.styled";
+import { useGetChartDataQuery } from "redux/API/chartApi";
+import { Box } from "@mui/material";
+import { LoaderSmall } from "components/MainLayout/Loader";
+
+export const ChartBar = ({
+  id,
+  options,
+  filter,
+  type,
+  filterSelects,
+  groupFilter,
+}) => {
+  const [series, setSeries] = useState({});
+
+  const { currentData, isFetching } = useGetChartDataQuery(
+    {
+      chartID: id,
+      filter:
+        Object.keys(filter).length > 0 && (filterSelects || groupFilter)
+          ? encodeURIComponent(JSON.stringify(filter))
+          : null,
+    },
+    { skip: !id }
+  );
 
   useEffect(() => {
-    if (chartConfig?.series) {
-      setCurrentSeries(chartConfig.series);
+    if (currentData) {
+      setSeries(currentData?.data.data);
     }
-    if (chartConfig?.data) {
-      let newSeries = chartConfig.data;
+  }, [currentData]);
 
-      for (const elem of filter) {
-        if (newSeries) {
-          if (elem === "") {
-            newSeries = newSeries[Object.keys(newSeries)[0]];
-          } else {
-            newSeries = newSeries[elem];
-          }
-        }
-      }
-
-      setCurrentSeries(newSeries);
-    }
-  }, [chartConfig, filter]);
-
-  if (!chartConfig.options) {
+  if (series.length === 0) {
     return <div>no data</div>;
   }
-  return (
-    <SC.BoxChartBarStyled>
-      {Array.isArray(currentSeries) && (
+
+  if (isFetching) {
+    return (
+      <SC.BoxChartBarStyled>
+        <Box
+          sx={{
+            height: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <LoaderSmall />
+        </Box>
+      </SC.BoxChartBarStyled>
+    );
+  }
+  if (series?.data?.length > 0) {
+    return (
+      <SC.BoxChartBarStyled>
         <SC.ChartBarStyled
-          options={{ ...chartConfig.options, colors: ["#55A5B7"] }}
-          series={currentSeries}
-          type={chartConfig.type}
+          options={{
+            ...options,
+            xaxis: {
+              ...options.xaxis,
+              categories: series.labels,
+            },
+            colors: ["#55A5B7"],
+          }}
+          series={[{ data: series.data }]}
+          type={type}
           height={"100%"}
         />
-      )}
-    </SC.BoxChartBarStyled>
-  );
+      </SC.BoxChartBarStyled>
+    );
+  } else {
+    return (
+      <SC.BoxChartBarStyled>
+        <Box
+          sx={{
+            height: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <SC.NoDataMessage>{`Данні опрацьовуються.`}</SC.NoDataMessage>
+        </Box>
+      </SC.BoxChartBarStyled>
+    );
+  }
 };

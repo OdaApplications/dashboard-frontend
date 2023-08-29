@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 
 import * as Base from "../ChartGenerators.styled";
+import { Typography } from "@mui/material";
 
 export const BoxChartBarListStyled = styled(Base.BoxChartBarStyled)(
   (props) => ({
@@ -17,4 +18,11 @@ export const BoxChartBarListStyled = styled(Base.BoxChartBarStyled)(
 export const ChartBarListStyled = styled(Base.ChartBarStyled)((props) => ({
   backgroundColor: "#fff",
   borderRadius: "20px",
+}));
+
+export const NoDataMessage = styled(Typography)((props) => ({
+  fontFamily: "e-Ukraine",
+  fontSize: "20px",
+  color: "#000",
+  textAlign: "center",
 }));

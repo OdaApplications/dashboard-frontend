@@ -6,4 +6,8 @@ export const PageLayoutContainerStyled = styled(Box)((props) => ({
   backgroundColor: "transparent",
   borderRadius: "12px",
   position: "relative",
+  display: "flex",
+  flexDirection: "column",
+  gap: "20px",
+  flexGrow: "1",
 }));

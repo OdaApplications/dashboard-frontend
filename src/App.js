@@ -32,6 +32,11 @@ function App() {
         <Route index element={<Navigate to={"/analytics/home/all"} />} />
 
         <Route
+          path="/analytics"
+          element={<Navigate to={"/analytics/home/all"} />}
+        />
+
+        <Route
           path="/analytics/:page"
           element={<PageLayoute chartsAcess={"public"} />}
         >
