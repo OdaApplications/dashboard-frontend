@@ -39,9 +39,50 @@ export const SelectClone = ({
   useEffect(() => {
     if (selectValues) {
       setValue("");
-      setCurrentValues(selectValues.data);
+      const userFilter = user?.access;
+      if (userFilter && userFilter === selectConfig.target) {
+        setCurrentValues([{ [userFilter]: [user[userFilter]] }]);
+        setValue(user[selectConfig.target]);
+      } else if (
+        userFilter &&
+        userFilter !== selectConfig.target &&
+        !(selectConfig.position > userFilterPosition)
+      ) {
+        setCurrentValues([
+          { [selectConfig.target]: [user[selectConfig.target]] },
+        ]);
+        setValue(user[selectConfig.target]);
+      } else {
+        setCurrentValues(selectValues.data);
+      }
     }
-  }, [selectValues]);
+  }, [
+    selectConfig.position,
+    selectConfig.target,
+    selectValues,
+    user,
+    userFilterPosition,
+  ]);
+
+  // useEffect(() => {
+  //   if (selectValues) {
+  //     const userFilter = user?.access;
+  //     if (userFilter && userFilter === selectConfig.target) {
+  //       setCurrentValues({ [user[userFilter]]: data[user[userFilter]] });
+  //     } else if (
+  //       userFilter &&
+  //       userFilter !== selectConfig.target &&
+  //       !(selectConfig.position > userFilterPosition)
+  //     ) {
+  //       setCurrentValues({
+  //         [user[selectConfig.target]]: data[user[selectConfig.target]],
+  //       });
+  //       setValue(user[selectConfig.target]);
+  //     } else {
+  //       setCurrentValues(data);
+  //     }
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (value !== "") {
@@ -75,7 +116,7 @@ export const SelectClone = ({
     return (
       <>
         <SC.FilterSelectsItem>
-          {Array.isArray(currentValues) && currentValues.length > 0 && (
+          {Array.isArray(currentValues) && currentValues.length > 1 && (
             <Box>
               <FormControl
                 size="small"

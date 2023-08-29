@@ -1,15 +1,15 @@
 import { Typography, Box, CircularProgress } from "@mui/material";
 import styled from "@emotion/styled";
 
-export const LoaderBig = () => {
+export const LoaderBig = ({ notFullScrean }) => {
   return (
     <Box
       sx={{
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "100vh",
-        width: "100vw",
+        height: `${notFullScrean ? "100%" : "100vh"}`,
+        width: `${notFullScrean ? "100%" : "100vw"}`,
         backgroundColor: "#fff",
         position: "absolute",
         top: 0,
@@ -77,12 +77,13 @@ export const LoaderBig = () => {
         >
           <Typography
             sx={{
+              fontFamily: "e-Ukraine",
               color: "#000",
               fontSize: "24px",
-              fontWeight: 700,
+              fontWeight: 500,
             }}
           >
-            METRICA
+            АНАЛІТИКА
           </Typography>
         </Box>
       </Box>

@@ -37,6 +37,8 @@ export const ChartConstructor = ({ chart, groupFilter }) => {
           options={chart.options}
           filter={filter}
           type={chart.type}
+          filterSelects={chart.filterSelects}
+          groupFilter={groupFilter}
         />
       </SC.BoxChartContainer>
     </SC.CahrtConstructorWrapper>

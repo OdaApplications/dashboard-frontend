@@ -27,3 +27,10 @@ export const TypographySubTitleStyled = styled(Typography)((props) => ({
   textAlign: "center",
   color: "#000",
 }));
+
+export const NoDataMessage = styled(Typography)((props) => ({
+  fontFamily: "e-Ukraine",
+  fontSize: "20px",
+  color: "#000",
+  textAlign: "center",
+}));

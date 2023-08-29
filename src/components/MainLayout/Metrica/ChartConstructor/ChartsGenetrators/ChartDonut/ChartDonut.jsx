@@ -1,17 +1,26 @@
 import React, { useState, useEffect } from "react";
 import * as SC from "./ChartDonut.styled";
 import { labelDonutFormaterFunc } from "components/helpers";
+import { Box } from "@mui/material";
 
 import { useGetChartDataQuery } from "redux/API/chartApi";
+import { LoaderSmall } from "components/MainLayout/Loader";
 
-export const ChartDonut = ({ id, options, filter, type }) => {
-  const [series, setSeries] = useState({ data: [], labels: [] });
+export const ChartDonut = ({
+  id,
+  options,
+  filter,
+  type,
+  filterSelects,
+  groupFilter,
+}) => {
+  const [series, setSeries] = useState({});
 
-  const { currentData } = useGetChartDataQuery(
+  const { currentData, isFetching } = useGetChartDataQuery(
     {
       chartID: id,
       filter:
-        Object.keys(filter).length > 0
+        Object.keys(filter).length > 0 && (filterSelects || groupFilter)
           ? encodeURIComponent(JSON.stringify(filter))
           : null,
     },
@@ -28,22 +37,56 @@ export const ChartDonut = ({ id, options, filter, type }) => {
     return <div>no data</div>;
   }
 
-  return (
-    <SC.BoxDonutStyled>
-      <SC.DonutBarStyled
-        options={{
-          ...options,
-          dataLabels: options.dataLabels.formatter
-            ? {
-                ...options.dataLabels,
-                formatter: labelDonutFormaterFunc(),
-              }
-            : options.dataLabels,
-        }}
-        series={series.data}
-        type={type}
-        height={"100%"}
-      />
-    </SC.BoxDonutStyled>
-  );
+  if (isFetching) {
+    return (
+      <SC.BoxDonutStyled>
+        <Box
+          sx={{
+            height: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <LoaderSmall />
+        </Box>
+      </SC.BoxDonutStyled>
+    );
+  }
+
+  if (Object.keys(series).length > 0) {
+    return (
+      <SC.BoxDonutStyled>
+        <SC.DonutBarStyled
+          options={{
+            ...options,
+            dataLabels: options.dataLabels.formatter
+              ? {
+                  ...options.dataLabels,
+                  formatter: labelDonutFormaterFunc(),
+                }
+              : options.dataLabels,
+          }}
+          series={series.data}
+          type={type}
+          height={"100%"}
+        />
+      </SC.BoxDonutStyled>
+    );
+  } else {
+    return (
+      <SC.BoxDonutStyled>
+        <Box
+          sx={{
+            height: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <SC.NoDataMessage>{`Данні опрацьовуються.`}</SC.NoDataMessage>
+        </Box>
+      </SC.BoxDonutStyled>
+    );
+  }
 };
