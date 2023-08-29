@@ -15,8 +15,6 @@ import { useSelector } from "react-redux";
 import { selectPerson } from "redux/person/personSlice";
 import { GroupNavBar } from "./GroupNavBar/GroupNavBar";
 import { LoaderBig } from "components/MainLayout/Loader";
-import { transform } from "framer-motion";
-import { flex, position } from "styled-system";
 
 const PageLayoute = () => {
   const [setSubMenu] = useOutletContext();
