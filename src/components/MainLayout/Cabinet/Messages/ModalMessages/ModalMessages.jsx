@@ -3,7 +3,8 @@ import { Box, useMediaQuery } from "@mui/material";
 import * as SC from "./ModalMessages.styled";
 
 const ModalMessages = ({ message, onClose }) => {
-  const { title, text, senderName, senderEmail, createdAt } = message;
+  const { title, text, senderName, senderEmail, recieverName, createdAt } =
+    message;
 
   const isSmallScreen = useMediaQuery("(max-width: 767px)");
 
@@ -20,15 +21,13 @@ const ModalMessages = ({ message, onClose }) => {
       >
         <SC.MenuCloseIcon />
       </SC.MenuButton>
-
       <SC.ModalTitle style={{ fontSize: isSmallScreen ? "12px" : "14px" }}>
         {title}
       </SC.ModalTitle>
-
       <SC.SenderInfoBox>
         <Box>
           <SC.SenderTitle style={{ fontSize: isSmallScreen ? "12px" : "14px" }}>
-            {senderName}
+            Від: {senderName}
           </SC.SenderTitle>
           <SC.SenderLink
             href={`mailto:${senderEmail}`}
@@ -48,6 +47,12 @@ const ModalMessages = ({ message, onClose }) => {
           {dateTransformer(createdAt)}
         </p>
       </SC.SenderInfoBox>
+
+      {recieverName && (
+        <SC.SenderTitle style={{ fontSize: isSmallScreen ? "12px" : "14px" }}>
+          Депутату: {recieverName}
+        </SC.SenderTitle>
+      )}
 
       <div>
         <SC.SenderText style={{ fontSize: isSmallScreen ? "12px" : "14px" }}>
