@@ -20,7 +20,6 @@ export const Messages = () => {
   useEffect(() => {
     if (currentData) {
       let newData = [...currentData.data.userMessages];
-      // newData.sort(compareCreatedAt);
 
       setUserMessages(newData);
       setTotalCount(currentData.data.totalCount);
