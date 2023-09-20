@@ -10,6 +10,7 @@ export const CabinetPage = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        gap: "20px",
       }}
     >
       <CabinetLayout />
