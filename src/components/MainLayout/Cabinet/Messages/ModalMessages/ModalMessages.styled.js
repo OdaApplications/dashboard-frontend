@@ -84,3 +84,28 @@ export const SenderText = styled("p")(({ theme }) => ({
   textAlign: "justify",
   overflowWrap: "break-word",
 }));
+
+//AnswerButton
+export const AnswerButton = styled("button")(({ theme }) => ({
+  marginTop: "24px",
+  padding: "8px 16px",
+  color: "#fff",
+  backgroundColor: "#000",
+  borderRadius: "12px",
+  border: "none",
+  outline: "none",
+  cursor: "pointer",
+
+  display: "inline-flex",
+
+  fontFamily: "e-Ukraine",
+  fontSize: "14px",
+  fontWeight: "500",
+  textAlign: "center",
+
+  transition: "all 0.2s ease-in-out 0s",
+
+  "&:hover": {
+    opacity: "0.7",
+  },
+}));

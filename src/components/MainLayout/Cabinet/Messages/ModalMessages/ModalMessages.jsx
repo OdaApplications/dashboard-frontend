@@ -1,12 +1,21 @@
 import { dateTransformer } from "components/helpers";
 import { Box, useMediaQuery } from "@mui/material";
 import * as SC from "./ModalMessages.styled";
+import { display } from "styled-system";
+import { AnswerForm } from "./AnswerForm/AnswerForm";
+import { useState } from "react";
 
 const ModalMessages = ({ message, onClose }) => {
+  const [isAnswerForm, setIsAnswerForm] = useState(false);
+
   const { title, text, senderName, senderEmail, recieverName, createdAt } =
     message;
 
   const isSmallScreen = useMediaQuery("(max-width: 767px)");
+
+  const openAnswer = () => {
+    setIsAnswerForm(true);
+  };
 
   return (
     <SC.ModalMessagesWindow
@@ -59,6 +68,13 @@ const ModalMessages = ({ message, onClose }) => {
           {text}
         </SC.SenderText>
       </div>
+      {!isAnswerForm ? (
+        <Box sx={{ display: "flex", justifyContent: "center", mt: "20px" }}>
+          <SC.AnswerButton onClick={openAnswer}>Відповісти</SC.AnswerButton>
+        </Box>
+      ) : (
+        isAnswerForm && <AnswerForm />
+      )}
     </SC.ModalMessagesWindow>
   );
 };

@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import Messages from "./Messages/Messages";
 import Solicitations from "./Solicitations/Solicitations";
 import Petitions from "./Petitions/Petitions";
+import { Box } from "@mui/material";
 
 export const CabinetLayout = () => {
   const { page } = useParams();
@@ -17,11 +18,18 @@ export const CabinetLayout = () => {
   }, [setSubMenu]);
 
   return (
-    <>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        width: "100%",
+        gap: "20px",
+      }}
+    >
       {page === "messages" && <Messages />}
       {page === "solicitations" && <Solicitations />}
       {page === "petitions" && <Petitions />}
-    </>
+    </Box>
   );
 };
 
