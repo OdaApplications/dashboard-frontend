@@ -91,7 +91,7 @@ export const AnswerButton = styled("button")(({ theme }) => ({
   padding: "8px 16px",
   color: "#fff",
   backgroundColor: "#000",
-  borderRadius: "12px",
+  borderRadius: "20px",
   border: "none",
   outline: "none",
   cursor: "pointer",
@@ -108,4 +108,24 @@ export const AnswerButton = styled("button")(({ theme }) => ({
   "&:hover": {
     opacity: "0.7",
   },
+}));
+
+export const AnswerBox = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "flex-start",
+  justifyContent: "center",
+}));
+
+export const AnswerTitle = styled(SenderText)(({ theme }) => ({}));
+
+export const AnswerText = styled(SenderText)(({ theme }) => ({}));
+
+export const Devider = styled("div")(({ theme }) => ({
+  width: "100%",
+  height: "2px",
+
+  backgroundColor: "rgba(0, 0, 0, 0.2)",
+  marginTop: "32px",
+  marginBottom: "8px",
 }));

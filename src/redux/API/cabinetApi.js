@@ -7,7 +7,17 @@ export const cabinetApi = api.injectEndpoints({
         url: `/profile/messages/get-messages?page=${page}&limit=${limit}`,
       }),
     }),
+    sendAnswer: builder.mutation({
+      query: (data) => {
+        console.log(data);
+        return {
+          url: `/profile/messages/answer-message`,
+          method: "POST",
+          body: data,
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetUserMsgQuery } = cabinetApi;
+export const { useGetUserMsgQuery, useSendAnswerMutation } = cabinetApi;

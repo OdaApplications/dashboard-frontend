@@ -3,18 +3,37 @@ import { Box, useMediaQuery } from "@mui/material";
 import * as SC from "./ModalMessages.styled";
 import { display } from "styled-system";
 import { AnswerForm } from "./AnswerForm/AnswerForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const ModalMessages = ({ message, onClose }) => {
   const [isAnswerForm, setIsAnswerForm] = useState(false);
+  const [answer, setAnswer] = useState("");
 
-  const { title, text, senderName, senderEmail, recieverName, createdAt } =
-    message;
+  const {
+    title,
+    text,
+    senderName,
+    senderEmail,
+    recieverName,
+    createdAt,
+    textAnswer,
+    id,
+  } = message;
+
+  useEffect(() => {
+    if (textAnswer) {
+      setAnswer(textAnswer);
+    }
+  }, [textAnswer]);
 
   const isSmallScreen = useMediaQuery("(max-width: 767px)");
 
   const openAnswer = () => {
     setIsAnswerForm(true);
+  };
+
+  const closeAnswer = () => {
+    setIsAnswerForm(false);
   };
 
   return (
@@ -56,24 +75,32 @@ const ModalMessages = ({ message, onClose }) => {
           {dateTransformer(createdAt)}
         </p>
       </SC.SenderInfoBox>
-
       {recieverName && (
         <SC.SenderTitle style={{ fontSize: isSmallScreen ? "12px" : "14px" }}>
           Депутату: {recieverName}
         </SC.SenderTitle>
       )}
-
       <div>
         <SC.SenderText style={{ fontSize: isSmallScreen ? "12px" : "14px" }}>
           {text}
         </SC.SenderText>
       </div>
-      {!isAnswerForm ? (
+      {!isAnswerForm && answer.length === 0 && (
         <Box sx={{ display: "flex", justifyContent: "center", mt: "20px" }}>
           <SC.AnswerButton onClick={openAnswer}>Відповісти</SC.AnswerButton>
         </Box>
-      ) : (
-        isAnswerForm && <AnswerForm />
+      )}
+      {isAnswerForm && answer.length === 0 && (
+        <AnswerForm id={id} handleClose={closeAnswer} setAnswer={setAnswer} />
+      )}
+      {answer.length > 0 && (
+        <>
+          <SC.Devider></SC.Devider>
+          <SC.AnswerBox>
+            <SC.AnswerTitle>Відповідь:</SC.AnswerTitle>
+            <SC.AnswerText>{answer}</SC.AnswerText>
+          </SC.AnswerBox>
+        </>
       )}
     </SC.ModalMessagesWindow>
   );

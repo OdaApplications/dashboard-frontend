@@ -2,7 +2,11 @@ import { Box, Button, TextField } from "@mui/material";
 import styled from "@emotion/styled";
 
 export const AnswerFormContainer = styled(Box)(({ theme }) => ({
-  paddingTop: "24px",
+  marginTop: "40px",
+  padding: "32px 24px",
+
+  border: "3px solid #000",
+  borderRadius: "12px",
 }));
 
 export const AnswerForm = styled("form")(({ theme }) => ({
@@ -62,9 +66,10 @@ export const AnswerFormInput = styled(TextField)(({ theme }) => ({
 export const AnswerFormButton = styled(Button)(({ theme }) => ({
   marginTop: "24px",
   padding: "8px 16px",
+  minWidth: "120px",
   color: "#fff",
   backgroundColor: "#000",
-  borderRadius: "12px",
+  borderRadius: "20px",
   border: "none",
   outline: "none",
   cursor: "pointer",
@@ -93,12 +98,13 @@ export const AnswerFormButton = styled(Button)(({ theme }) => ({
 
   "&.reverse:hover": {
     backgroundColor: "#000",
+    opacity: "1",
     color: "#fff",
   },
 
   "&.Mui-disabled": {
     //grey
-    backgroundColor: "#9e9e9e",
+    backgroundColor: "#000",
     color: "#fff",
     opacity: "0.5",
   },
