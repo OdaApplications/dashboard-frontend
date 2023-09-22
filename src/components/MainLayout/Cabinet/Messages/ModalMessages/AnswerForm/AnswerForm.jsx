@@ -2,7 +2,6 @@
 
 import React from "react";
 import { Box } from "@mui/material";
-import { useDispatch } from "react-redux";
 // import { sendAnswer } from "redux/API/messagesApi";
 import { LoaderSmall } from "components/MainLayout/Loader";
 import { useSendAnswerMutation } from "redux/API/cabinetApi";
@@ -10,10 +9,7 @@ import { useFormik } from "formik";
 
 import * as SC from "./AnswerForm.styled";
 
-const isLoading = false;
-
 export const AnswerForm = ({ id, handleClose, setAnswer }) => {
-  const dispatch = useDispatch();
   const [sendAnswer, { isLoading }] = useSendAnswerMutation();
 
   const onSubmit = async (data) => {
