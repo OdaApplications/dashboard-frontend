@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://testserver.digital-zakarpattia.com.ua/api",
+    baseUrl: "https://analytics.carpathia.gov.ua/api",
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token;
       if (token) {
@@ -14,3 +14,5 @@ export const api = createApi({
   }),
   endpoints: (builder) => ({}),
 });
+
+//https://testserver.digital-zakarpattia.com.ua/api

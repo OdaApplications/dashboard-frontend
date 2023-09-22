@@ -84,3 +84,48 @@ export const SenderText = styled("p")(({ theme }) => ({
   textAlign: "justify",
   overflowWrap: "break-word",
 }));
+
+//AnswerButton
+export const AnswerButton = styled("button")(({ theme }) => ({
+  marginTop: "24px",
+  padding: "8px 16px",
+  color: "#fff",
+  backgroundColor: "#000",
+  borderRadius: "20px",
+  border: "none",
+  outline: "none",
+  cursor: "pointer",
+
+  display: "inline-flex",
+
+  fontFamily: "e-Ukraine",
+  fontSize: "14px",
+  fontWeight: "500",
+  textAlign: "center",
+
+  transition: "all 0.2s ease-in-out 0s",
+
+  "&:hover": {
+    opacity: "0.7",
+  },
+}));
+
+export const AnswerBox = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "flex-start",
+  justifyContent: "center",
+}));
+
+export const AnswerTitle = styled(SenderText)(({ theme }) => ({}));
+
+export const AnswerText = styled(SenderText)(({ theme }) => ({}));
+
+export const Devider = styled("div")(({ theme }) => ({
+  width: "100%",
+  height: "2px",
+
+  backgroundColor: "rgba(0, 0, 0, 0.2)",
+  marginTop: "32px",
+  marginBottom: "8px",
+}));
