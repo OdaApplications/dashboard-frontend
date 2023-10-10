@@ -15,4 +15,4 @@ export const api = createApi({
   endpoints: (builder) => ({}),
 });
 
-//https://testserver.digital-zakarpattia.com.ua/api
+// https://testserver.digital-zakarpattia.com.ua/api
